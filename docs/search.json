@@ -75,5 +75,131 @@
     "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
     "section": "Navegación rápida",
     "text": "Navegación rápida\n\n\n🌿 Proyecto\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n\n\n📍 Zona de estudio\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n\n\n🧪 Metodología\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n\n\n📈 Resultados\nGráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.\n\n\n🛰 Teledetección\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.\n\n\n📂 Datos abiertos\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito. Ir a datos"
+  },
+  {
+    "objectID": "resultados.html",
+    "href": "resultados.html",
+    "title": "Resultados preliminares",
+    "section": "",
+    "text": "Registros horarios por parcela\n\n13.490\n\n\n\nRegistros meteorológicos únicos\n\n5.181\n\n\n\nFecha inicial\n\n2025-09-02\n\n\n\nFecha final\n\n2026-05-02\n\n\n\nLas variables meteorológicas provienen de una única estación instalada en el área experimental. Por esa razón, se presentan como una sola serie temporal y no como comparación entre parcelas. Las variables de superficie, suelo y balance energético sí se presentan por parcela, porque corresponden a mediciones o estimaciones asociadas a CAE1, CAE2 y Exótico."
+  },
+  {
+    "objectID": "resultados.html#lectura-general-de-los-datos",
+    "href": "resultados.html#lectura-general-de-los-datos",
+    "title": "Resultados preliminares",
+    "section": "",
+    "text": "Registros horarios por parcela\n\n13.490\n\n\n\nRegistros meteorológicos únicos\n\n5.181\n\n\n\nFecha inicial\n\n2025-09-02\n\n\n\nFecha final\n\n2026-05-02\n\n\n\nLas variables meteorológicas provienen de una única estación instalada en el área experimental. Por esa razón, se presentan como una sola serie temporal y no como comparación entre parcelas. Las variables de superficie, suelo y balance energético sí se presentan por parcela, porque corresponden a mediciones o estimaciones asociadas a CAE1, CAE2 y Exótico."
+  },
+  {
+    "objectID": "resultados.html#disponibilidad-de-variables-meteorológicas",
+    "href": "resultados.html#disponibilidad-de-variables-meteorológicas",
+    "title": "Resultados preliminares",
+    "section": "Disponibilidad de variables meteorológicas",
+    "text": "Disponibilidad de variables meteorológicas\n\n\n\n\n\nVariable\nDescripción\nRegistros válidos\n\n\n\n\ntemp_aire\nTemperatura del aire a 2 m\n5181\n\n\nHR\nHumedad relativa del aire\n5181\n\n\nvelocidad_viento\nVelocidad del viento\n5181\n\n\nWindDir\nDirección del viento\n5181\n\n\nRain_mm_Tot\nPrecipitación\n5181\n\n\nETos\nEvapotranspiración de referencia\n5181\n\n\npresion_atm\nPresión atmosférica\n5181"
+  },
+  {
+    "objectID": "resultados.html#disponibilidad-de-variables-por-parcela",
+    "href": "resultados.html#disponibilidad-de-variables-por-parcela",
+    "title": "Resultados preliminares",
+    "section": "Disponibilidad de variables por parcela",
+    "text": "Disponibilidad de variables por parcela\n\n\n\n\n\n\n\n\n\n\n\nVariable\nDescripción\nRegistros válidos\nParcelas con datos\n\n\n\n\ntemp_superficie\nTemperatura superficial\n13472\nCAE1, CAE2, Exótico\n\n\nG\nFlujo de calor del suelo\n13487\nCAE1, CAE2, Exótico\n\n\nRn\nRadiación neta\n13490\nCAE1, CAE2, Exótico\n\n\nhumedad_volumetrica\nHumedad del suelo a 5 cm\n13490\nCAE1, CAE2, Exótico\n\n\nSWC_40CM\nHumedad del suelo a 40 cm\n13490\nCAE1, CAE2, Exótico\n\n\nLE_final\nFlujo de calor latente\n13467\nCAE1, CAE2, Exótico\n\n\nH_final\nFlujo de calor sensible\n13468\nCAE1, CAE2, Exótico\n\n\nET_mm_h\nEvapotranspiración horaria\n13467\nCAE1, CAE2, Exótico"
+  },
+  {
+    "objectID": "resultados.html#temperatura-del-aire-a-2-m",
+    "href": "resultados.html#temperatura-del-aire-a-2-m",
+    "title": "Resultados preliminares",
+    "section": "Temperatura del aire a 2 m",
+    "text": "Temperatura del aire a 2 m\n\n\n\n\n\n\n\n\nFigure 1"
+  },
+  {
+    "objectID": "resultados.html#humedad-relativa-del-aire",
+    "href": "resultados.html#humedad-relativa-del-aire",
+    "title": "Resultados preliminares",
+    "section": "Humedad relativa del aire",
+    "text": "Humedad relativa del aire\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "resultados.html#velocidad-del-viento",
+    "href": "resultados.html#velocidad-del-viento",
+    "title": "Resultados preliminares",
+    "section": "Velocidad del viento",
+    "text": "Velocidad del viento\n\n\n\n\n\n\n\n\nFigure 3"
+  },
+  {
+    "objectID": "resultados.html#dirección-del-viento",
+    "href": "resultados.html#dirección-del-viento",
+    "title": "Resultados preliminares",
+    "section": "Dirección del viento",
+    "text": "Dirección del viento\n\n\n\n\n\n\n\n\nFigure 4"
+  },
+  {
+    "objectID": "resultados.html#precipitación-diaria",
+    "href": "resultados.html#precipitación-diaria",
+    "title": "Resultados preliminares",
+    "section": "Precipitación diaria",
+    "text": "Precipitación diaria\n\n\n\n\n\n\n\n\nFigure 5"
+  },
+  {
+    "objectID": "resultados.html#evapotranspiración-de-referencia",
+    "href": "resultados.html#evapotranspiración-de-referencia",
+    "title": "Resultados preliminares",
+    "section": "Evapotranspiración de referencia",
+    "text": "Evapotranspiración de referencia\n\n\n\n\n\n\n\n\nFigure 6"
+  },
+  {
+    "objectID": "resultados.html#temperatura-superficial",
+    "href": "resultados.html#temperatura-superficial",
+    "title": "Resultados preliminares",
+    "section": "Temperatura superficial",
+    "text": "Temperatura superficial\n\n\n\n\n\n\n\n\nFigure 7"
+  },
+  {
+    "objectID": "resultados.html#humedad-del-suelo-a-5-cm",
+    "href": "resultados.html#humedad-del-suelo-a-5-cm",
+    "title": "Resultados preliminares",
+    "section": "Humedad del suelo a 5 cm",
+    "text": "Humedad del suelo a 5 cm\n\n\n\n\n\n\n\n\nFigure 8"
+  },
+  {
+    "objectID": "resultados.html#humedad-del-suelo-a-40-cm",
+    "href": "resultados.html#humedad-del-suelo-a-40-cm",
+    "title": "Resultados preliminares",
+    "section": "Humedad del suelo a 40 cm",
+    "text": "Humedad del suelo a 40 cm\n\n\n\n\n\n\n\n\nFigure 9"
+  },
+  {
+    "objectID": "resultados.html#flujo-de-calor-del-suelo",
+    "href": "resultados.html#flujo-de-calor-del-suelo",
+    "title": "Resultados preliminares",
+    "section": "Flujo de calor del suelo",
+    "text": "Flujo de calor del suelo\n\n\n\n\n\n\n\n\nFigure 10"
+  },
+  {
+    "objectID": "resultados.html#flujo-de-calor-latente",
+    "href": "resultados.html#flujo-de-calor-latente",
+    "title": "Resultados preliminares",
+    "section": "Flujo de calor latente",
+    "text": "Flujo de calor latente\n\n\n\n\n\n\n\n\nFigure 11"
+  },
+  {
+    "objectID": "resultados.html#flujo-de-calor-sensible",
+    "href": "resultados.html#flujo-de-calor-sensible",
+    "title": "Resultados preliminares",
+    "section": "Flujo de calor sensible",
+    "text": "Flujo de calor sensible\n\n\n\n\n\n\n\n\nFigure 12"
+  },
+  {
+    "objectID": "resultados.html#evapotranspiración-diaria-acumulada",
+    "href": "resultados.html#evapotranspiración-diaria-acumulada",
+    "title": "Resultados preliminares",
+    "section": "Evapotranspiración diaria acumulada",
+    "text": "Evapotranspiración diaria acumulada\n\n\n\n\n\n\n\n\nFigure 13"
+  },
+  {
+    "objectID": "resultados.html#componentes-principales-del-balance-energético",
+    "href": "resultados.html#componentes-principales-del-balance-energético",
+    "title": "Resultados preliminares",
+    "section": "Componentes principales del balance energético",
+    "text": "Componentes principales del balance energético\n\n\n\n\n\n\n\n\nFigure 14"
   }
 ]
