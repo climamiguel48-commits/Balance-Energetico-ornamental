@@ -30,9 +30,44 @@ Valle del Maipo, Región Metropolitana.
 
 ## Mapa de referencia
 
-<iframe class="map-frame" src="https://www.openstreetmap.org/export/embed.html?bbox=-70.88%2C-33.78%2C-70.43%2C-33.24&amp;layer=mapnik&amp;marker=-33.354%2C-70.691"></iframe>
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
 
-<p class="table-note">El marcador corresponde al Vivero y Jardín Pumahuida. La Fundación AgroUC se ubica hacia Pirque, al suroriente del área mostrada.</p>
+library(leaflet)
+
+sitios <- data.frame(
+  sitio = c("Vivero y Jardín Pumahuida", "Fundación AgroUC"),
+  comuna = c("Huechuraba", "Pirque"),
+  lat = c(-33.354, -33.6736),
+  lon = c(-70.691, -70.5858),
+  descripcion = c(
+    "Parcelas experimentales CAE1, CAE2 y Exóticas.",
+    "Área de lisímetros de pesada para pasto alfombra y cubresuelo nativo."
+  )
+)
+
+leaflet(sitios) |>
+  addProviderTiles(providers$CartoDB.Positron) |>
+  addMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    popup = ~paste0(
+      "<strong>", sitio, "</strong><br>",
+      comuna, "<br>",
+      descripcion
+    )
+  ) |>
+  fitBounds(
+    lng1 = min(sitios$lon),
+    lat1 = min(sitios$lat),
+    lng2 = max(sitios$lon),
+    lat2 = max(sitios$lat)
+  )
+```
+
+<p class="table-note">El mapa muestra los dos sitios experimentales del proyecto: el Vivero y Jardín Pumahuida en Huechuraba y la Fundación AgroUC en Pirque.</p>
 
 ## Contexto climático
 

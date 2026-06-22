@@ -29,6 +29,8 @@ website:
         text: Teledetección
       - href: datos.qmd
         text: Datos
+      - href: lisimetria.qmd
+        text: Lisimetría
     right:
       - icon: github
         href: https://github.com/

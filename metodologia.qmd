@@ -72,6 +72,4 @@ El sistema de balance energético será calibrado mediante comparación con fluj
 
 El riego se maneja por goteo y agotamiento del agua fácilmente aprovechable. La programación considera capacidad de campo, punto de marchitez permanente, densidad aparente, profundidad radicular, pedregosidad, porcentaje de suelo mojado y umbral de riego.
 
-## Lisimetría
 
-En Fundación AgroUC se miden demandas hídricas de pasto alfombra y cubresuelo nativo con lisímetros de pesada. La variación de masa se transforma a lámina de agua, permitiendo estimar consumo neto y coeficientes de paisajismo.

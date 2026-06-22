@@ -51,6 +51,4 @@ Cuando estén disponibles los productos, esta página incluirá:
 - Estimación espacial de ET por parcela.
 - Comparación entre ET medida y ET modelada.
 
-::: {.callout-note}
-Esta sección está diseñada para crecer sin rehacer el sitio. Cuando tengas los productos de dron, se agregan a una carpeta `data/remote_sensing/` y se conectan aquí.
-:::
+

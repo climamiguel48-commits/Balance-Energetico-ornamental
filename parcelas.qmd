@@ -90,3 +90,26 @@ p <- ggplot(res, aes(Grupo, Unidades, fill = Tipo, text = paste("Tipo:", Tipo, "
   theme_minimal(base_size = 13)
 ggplotly(p, tooltip = "text")
 ```
+
+
+## Parcela CAE1
+
+![](img/FOTO_CAE1.jpg){fig-alt="Parcela CAE1" width="100%"}
+
+La parcela CAE1 está compuesta por especies nativas y adaptadas al clima mediterráneo de Chile central. En esta parcela se monitorean variables de balance energético, temperatura superficial, humedad del suelo y evapotranspiración.
+
+---
+
+## Parcela CAE2
+
+![](img/FOTO_cAE2.jpg){fig-alt="Parcela CAE2" width="100%"}
+
+La parcela CAE2 incorpora una composición vegetal diferente, permitiendo comparar respuestas ecofisiológicas y energéticas frente a las mismas condiciones atmosféricas.
+
+---
+
+## Parcela de especies exóticas
+
+![](img/FOTO_EXOTICO.jpg){fig-alt="Parcela de especies exóticas" width="100%"}
+
+La parcela de especies exóticas representa un modelo ornamental ampliamente utilizado en paisajismo urbano. Su comparación con especies nativas permite evaluar oportunidades de reducción del consumo hídrico en áreas verdes.

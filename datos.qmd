@@ -51,14 +51,4 @@ Datos horarios del analizador de gases.
 <a class="btn-puma" href="data/Eddy_covariance_Irga_hora.xlsx" download>⬇ Descargar Excel</a>
 :::
 
-::: {.puma-card .download-card}
-### Manuscrito del proyecto
-Documento base del proyecto doctoral.
 
-<a class="btn-puma" href="data/Proyecto%20de%20tesis%20doctoral_Miguel%20Silva_final_2.docx" download>⬇ Descargar Word</a>
-:::
-:::
-
-::: {.callout-note}
-La lectura de datos fue ajustada para evitar errores por columnas con tipos mixtos entre archivos, como `RECORD`. El sitio lee las bases inicialmente como texto y luego convierte solo las variables necesarias para graficar.
-:::

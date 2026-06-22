@@ -21,7 +21,6 @@ n_registros <- nrow(datos)
 
 Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas **CAE1**, **CAE2** y especies **exóticas** en áreas verdes de clima mediterráneo semiárido de Chile.
 
-<span class="badge-soft">Balance energético</span> <span class="badge-soft">Eddy Covariance</span> <span class="badge-soft">Lisimetría</span> <span class="badge-soft">Knl / Kl</span> <span class="badge-soft">Teledetección en desarrollo</span>
 :::
 
 ::: {.card-grid}

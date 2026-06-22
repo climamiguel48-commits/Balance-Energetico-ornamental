@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/zona-estudio.html</loc>
-    <lastmod>2026-06-22T01:17:26.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/resultados.html</loc>
-    <lastmod>2026-06-22T15:52:10.132Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/parcelas.html</loc>
-    <lastmod>2026-06-22T01:16:10.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/index.html</loc>
-    <lastmod>2026-06-22T16:38:14.223Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/datos.html</loc>
-    <lastmod>2026-06-22T15:41:42.118Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/metodologia.html</loc>
-    <lastmod>2026-06-22T01:16:51.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tusitio.github.io/proyecto-pumahuida/proyecto.html</loc>
-    <lastmod>2026-06-22T01:16:10.000Z</lastmod>
+    <loc>https://tusitio.github.io/proyecto-pumahuida/lisimetria.html</loc>
+    <lastmod>2026-06-22T17:36:32.112Z</lastmod>
   </url>
   <url>
     <loc>https://tusitio.github.io/proyecto-pumahuida/teledeteccion.html</loc>
-    <lastmod>2026-06-22T01:16:51.000Z</lastmod>
+    <lastmod>2026-06-22T17:08:42.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tusitio.github.io/proyecto-pumahuida/index.html</loc>
+    <lastmod>2026-06-22T16:49:31.867Z</lastmod>
   </url>
 </urlset>
