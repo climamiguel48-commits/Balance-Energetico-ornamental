@@ -113,6 +113,21 @@ b {
 .quick-card p {
   margin-bottom: 0;
 }
+.quick-grid {
+  gap: 1.25rem;
+}
+
+.quick-grid p {
+  margin: 0;
+}
+
+.quick-grid h3 {
+  margin-bottom: 0.6rem;
+}
+
+.quick-grid br {
+  display: none;
+}
 
 
 

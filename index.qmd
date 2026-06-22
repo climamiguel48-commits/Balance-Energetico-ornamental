@@ -59,46 +59,14 @@ La investigación desarrolla un marco metodológico integrado para estimar la de
 
 ## Navegación rápida {.section-title}
 
-::: {.card-grid-wide}
+<div class="card-grid-wide quick-grid">
+<a class="puma-card quick-card" href="proyecto.html"><h3>🌿 Proyecto</h3><p>Contexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.</p></a>
+<a class="puma-card quick-card" href="zona-estudio.html"><h3>📍 Zona de estudio</h3><p>Ubicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.</p></a>
+<a class="puma-card quick-card" href="metodologia.html"><h3>🧪 Metodología</h3><p>Sensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.</p></a>
+<a class="puma-card quick-card" href="parcelas-fotos.html"><h3>🌱 Parcelas</h3><p>Galería y descripción de las parcelas CAE1, CAE2 y exóticas.</p></a>
+<a class="puma-card quick-card" href="lisimetria.html"><h3>⚖️ Lisimetría</h3><p>Ensayos con lisímetros de pesada para pasto alfombra y cubresuelo nativo.</p></a>
+<a class="puma-card quick-card" href="resultados.html"><h3>📈 Resultados</h3><p>Gráficas de variables meteorológicas, superficie, suelo y balance energético.</p></a>
+<a class="puma-card quick-card" href="teledeteccion.html"><h3>🛰 Teledetección</h3><p>Módulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT.</p></a>
+<a class="puma-card quick-card download-card" href="datos.html"><h3>📂 Datos abiertos</h3><p>Descarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito.</p></a>
+</div>
 
-<a class="puma-card quick-card" href="proyecto.html">
-<h3>🌿 Proyecto</h3>
-<p>Contexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.</p>
-</a>
-
-<a class="puma-card quick-card" href="zona-estudio.html">
-<h3>📍 Zona de estudio</h3>
-<p>Ubicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.</p>
-</a>
-
-<a class="puma-card quick-card" href="metodologia.html">
-<h3>🧪 Metodología</h3>
-<p>Sensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.</p>
-</a>
-
-<a class="puma-card quick-card" href="parcelas-fotos.html">
-<h3>🌱 Parcelas</h3>
-<p>Galería y descripción de las parcelas CAE1, CAE2 y exóticas.</p>
-</a>
-
-<a class="puma-card quick-card" href="lisimetria.html">
-<h3>⚖️ Lisimetría</h3>
-<p>Ensayos con lisímetros de pesada para pasto alfombra y cubresuelo nativo.</p>
-</a>
-
-<a class="puma-card quick-card" href="teledeteccion.html">
-<h3>🛰 Teledetección</h3>
-<p>Módulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT.</p>
-</a>
-
-<a class="puma-card quick-card" href="resultados.html">
-<h3>📈 Resultados</h3>
-<p>Gráficas de variables meteorológicas, superficie, suelo y balance energético.</p>
-</a>
-
-<a class="puma-card quick-card download-card" href="datos.html">
-<h3>📂 Datos abiertos</h3>
-<p>Descarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito.</p>
-</a>
-
-:::
