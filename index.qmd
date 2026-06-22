@@ -1,6 +1,6 @@
 ---
 title: "Demanda hídrica de vegetación ornamental nativa y exótica"
-subtitle: "Enfoque para cuentificar la demanda de agua de vegetación ornamental nativa
+subtitle: "Enfoque para cuantificar la demanda de agua de vegetación ornamental nativa
 de mayor potencial de uso para areas verdes de las zonas semiáridas mediterráneas de Chile"
 ---
 
