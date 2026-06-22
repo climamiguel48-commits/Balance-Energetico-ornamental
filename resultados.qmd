@@ -5,50 +5,168 @@ title: "Resultados preliminares"
 ```{r}
 #| label: setup-resultados
 #| include: false
+#| warning: false
+#| message: false
 
+library(readxl)
 library(dplyr)
-library(ggplot2)
-library(DT)
 library(tidyr)
+library(ggplot2)
 library(lubridate)
+library(knitr)
 
-source("scripts/helpers.R")
+# -----------------------------------------------------------------------------
+# Resultados preliminares - versión estable solo con ggplot2
+# -----------------------------------------------------------------------------
 
-# Versión estable: gráficos ggplot estáticos para evitar errores de Plotly con fechas.
+archivos <- list(
+  "CAE1" = "data/datos_horario_LE_corregidos_final_CAE1.xlsx",
+  "CAE2" = "data/datos_horario_LE_corregidos_final_CAE2.xlsx",
+  "Exótico" = "data/datos_horario_LE_corregidos_final_exotico.xlsx"
+)
 
-datos <- read_parcelas()
-diario <- summarise_daily(datos)
+normalizar_fecha_hora <- function(x) {
+  if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) return(as.POSIXct(x, tz = "America/Santiago"))
+  if (inherits(x, "Date")) return(as.POSIXct(x, tz = "America/Santiago"))
+  if (is.numeric(x)) return(as.POSIXct(x * 86400, origin = "1899-12-30", tz = "America/Santiago"))
 
-# Corrección defensiva de tipos ------------------------------------------------
-# Esto evita errores de Plotly cuando la fecha viene como texto, POSIXlt,
-# número de Excel o cualquier mezcla rara entre archivos.
-normalizar_fecha <- function(x) {
-  if (inherits(x, "Date")) return(x)
-  if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) return(as.Date(x))
-  if (is.numeric(x)) return(as.Date(x, origin = "1899-12-30"))
-  as.Date(parse_date_time(as.character(x),
-                          orders = c("ymd", "ymd HMS", "ymd HM", "dmy", "dmy HMS", "dmy HM"),
-                          quiet = TRUE))
+  suppressWarnings(parse_date_time(
+    as.character(x),
+    orders = c("ymd HMS", "ymd HM", "ymd", "dmy HMS", "dmy HM", "dmy", "mdy HMS", "mdy HM", "mdy"),
+    tz = "America/Santiago",
+    quiet = TRUE
+  ))
 }
 
-diario <- diario |>
-  ungroup() |>
-  mutate(
-    fecha = normalizar_fecha(fecha),
-    grupo = as.character(grupo)
-  ) |>
-  arrange(grupo, fecha)
+asegurar_columna <- function(df, nombre) {
+  if (!nombre %in% names(df)) df[[nombre]] <- NA_real_
+  df
+}
 
-datos <- datos |>
-  ungroup() |>
-  mutate(
-    fecha = normalizar_fecha(fecha),
-    grupo = as.character(grupo)
+leer_parcela <- function(ruta, grupo) {
+  df <- read_excel(ruta)
+
+  # Homologación de nombres conocidos entre archivos
+  if (!"SWC_40CM" %in% names(df) && "SWC_40CM_Avg" %in% names(df)) {
+    df$SWC_40CM <- df$SWC_40CM_Avg
+  }
+
+  if (!"HR" %in% names(df) && "RH" %in% names(df)) {
+    df$HR <- df$RH
+  }
+
+  if (!"temp_superficie" %in% names(df) && "TT_C" %in% names(df)) {
+    df$temp_superficie <- df$TT_C
+  }
+
+  # Columnas esperadas para los gráficos
+  variables_necesarias <- c(
+    "temp_superficie", "velocidad_viento", "WindDir", "temp_aire", "HR", "G",
+    "humedad_volumetrica", "SWC_40CM", "LE_final", "H_final", "ET_mm_h"
   )
 
-# Función auxiliar: si no hay datos suficientes, muestra un mensaje bonito
-hay_datos <- function(df) {
-  is.data.frame(df) && nrow(df) > 0
+  for (v in variables_necesarias) df <- asegurar_columna(df, v)
+
+  # Fecha/hora principal
+  if ("fecha_hora" %in% names(df)) {
+    fecha_hora <- normalizar_fecha_hora(df$fecha_hora)
+  } else if ("fecha" %in% names(df)) {
+    fecha_hora <- normalizar_fecha_hora(df$fecha)
+  } else if ("fecha.x" %in% names(df)) {
+    fecha_hora <- normalizar_fecha_hora(df$fecha.x)
+  } else {
+    fecha_hora <- as.POSIXct(NA)
+  }
+
+  df |>
+    mutate(
+      grupo = grupo,
+      fecha_hora = fecha_hora,
+      fecha = as.Date(fecha_hora)
+    ) |>
+    mutate(across(all_of(variables_necesarias), ~ suppressWarnings(as.numeric(.x)))) |>
+    select(grupo, fecha_hora, fecha, all_of(variables_necesarias))
+}
+
+datos <- bind_rows(lapply(names(archivos), function(g) leer_parcela(archivos[[g]], g))) |>
+  filter(!is.na(fecha_hora)) |>
+  arrange(grupo, fecha_hora)
+
+variables_graficar <- tibble::tribble(
+  ~variable, ~titulo, ~ylab, ~agregacion,
+  "temp_superficie", "Temperatura superficial", "Temperatura superficial (°C)", "mean",
+  "velocidad_viento", "Velocidad del viento", "Velocidad del viento (m s⁻¹)", "mean",
+  "WindDir", "Dirección del viento", "Dirección del viento (°)", "mean",
+  "temp_aire", "Temperatura del aire a 2 m", "Temperatura del aire a 2 m (°C)", "mean",
+  "HR", "Humedad relativa del aire", "Humedad relativa (%)", "mean",
+  "G", "Flujo de calor del suelo", "G (W m⁻²)", "mean",
+  "humedad_volumetrica", "Humedad del suelo a 5 cm", "Humedad volumétrica a 5 cm (m³ m⁻³)", "mean",
+  "SWC_40CM", "Humedad del suelo a 40 cm", "Humedad volumétrica a 40 cm (m³ m⁻³)", "mean",
+  "LE_final", "Flujo de calor latente", "LE (W m⁻²)", "mean",
+  "H_final", "Flujo de calor sensible", "H (W m⁻²)", "mean",
+  "ET_mm_h", "Evapotranspiración horaria", "ET (mm h⁻¹)", "sum"
+)
+
+resumen_disponibilidad <- variables_graficar |>
+  rowwise() |>
+  mutate(
+    registros_validos = sum(!is.na(datos[[variable]])),
+    parcelas_con_datos = paste(unique(datos$grupo[!is.na(datos[[variable]])]), collapse = ", ")
+  ) |>
+  ungroup()
+
+resumen_general <- datos |>
+  summarise(
+    registros = n(),
+    fecha_inicial = min(fecha, na.rm = TRUE),
+    fecha_final = max(fecha, na.rm = TRUE),
+    parcelas = n_distinct(grupo)
+  )
+
+preparar_diario <- function(df, variable, agregacion = "mean") {
+  if (!variable %in% names(df)) {
+    return(tibble(grupo = character(), fecha = as.Date(character()), valor = numeric()))
+  }
+
+  if (agregacion == "sum") {
+    salida <- df |>
+      group_by(grupo, fecha) |>
+      summarise(valor = sum(.data[[variable]], na.rm = TRUE), .groups = "drop")
+  } else {
+    salida <- df |>
+      group_by(grupo, fecha) |>
+      summarise(valor = mean(.data[[variable]], na.rm = TRUE), .groups = "drop")
+  }
+
+  salida |>
+    mutate(valor = ifelse(is.infinite(valor) | is.nan(valor), NA_real_, valor)) |>
+    filter(!is.na(fecha), !is.na(valor))
+}
+
+hay_datos <- function(df) is.data.frame(df) && nrow(df) > 0 && sum(!is.na(df$valor)) > 0
+
+plot_variable <- function(variable, titulo, ylab, agregacion = "mean") {
+  df <- preparar_diario(datos, variable, agregacion)
+
+  if (!hay_datos(df)) {
+    plot.new()
+    text(0.5, 0.5, paste("Aún no hay datos suficientes para graficar:", titulo), cex = 1.1)
+    return(invisible(NULL))
+  }
+
+  ggplot(df, aes(x = fecha, y = valor, color = grupo, group = grupo)) +
+    geom_line(linewidth = 0.65, alpha = 0.9) +
+    labs(
+      title = titulo,
+      x = "Fecha",
+      y = ylab,
+      color = "Parcela"
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(
+      plot.title = element_text(face = "bold", size = 15),
+      legend.position = "bottom"
+    )
 }
 ```
 
@@ -58,206 +176,170 @@ hay_datos <- function(df) {
 ::: {.puma-card}
 **Registros horarios**
 
-<div class="metric">`r format(nrow(datos), big.mark = '.', decimal.mark = ',')`</div>
+<div class="metric">`r format(resumen_general$registros, big.mark = '.', decimal.mark = ',')`</div>
 :::
 
 ::: {.puma-card}
 **Fecha inicial**
 
-<div class="metric-small">`r min(datos$fecha, na.rm = TRUE)`</div>
+<div class="metric-small">`r resumen_general$fecha_inicial`</div>
 :::
 
 ::: {.puma-card}
 **Fecha final**
 
-<div class="metric-small">`r max(datos$fecha, na.rm = TRUE)`</div>
+<div class="metric-small">`r resumen_general$fecha_final`</div>
 :::
 
 ::: {.puma-card}
 **Parcelas**
 
-<div class="metric">`r length(unique(datos$grupo))`</div>
+<div class="metric">`r resumen_general$parcelas`</div>
 :::
 :::
 
-## Flujo de calor latente preliminar
+## Disponibilidad de variables
 
 ```{r}
-#| label: fig-le
-#| fig-height: 6
+#| label: tabla-disponibilidad
+#| echo: false
 
-df_le <- diario |>
-  filter(!is.na(fecha), !is.na(LE_medio)) |>
-  mutate(
-    tooltip = paste0(
-      "Parcela: ", grupo,
-      "<br>Fecha: ", fecha,
-      "<br>LE: ", round(LE_medio, 2), " W m⁻²"
-    )
-  )
-
-if (hay_datos(df_le)) {
-  p_le <- ggplot(df_le, aes(x = fecha, y = LE_medio, color = grupo, group = grupo)) +
-    geom_line(linewidth = 0.75, alpha = 0.9) +
-    labs(x = NULL, y = "LE medio diario (W m⁻²)", color = "Parcela") +
-    theme_minimal(base_size = 13)
-
-  p_le
-} else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de LE para graficar.</div>")
-}
+resumen_disponibilidad |>
+  select(Variable = variable, `Registros válidos` = registros_validos, `Parcelas con datos` = parcelas_con_datos) |>
+  knitr::kable()
 ```
 
-## Radiación neta
+## Temperatura superficial
 
 ```{r}
-#| label: fig-rn
-#| fig-height: 6
-
-df_rn <- diario |>
-  filter(!is.na(fecha), !is.na(Rn_medio)) |>
-  mutate(
-    tooltip = paste0(
-      "Parcela: ", grupo,
-      "<br>Fecha: ", fecha,
-      "<br>Rn: ", round(Rn_medio, 2), " W m⁻²"
-    )
-  )
-
-if (hay_datos(df_rn)) {
-  p_rn <- ggplot(df_rn, aes(x = fecha, y = Rn_medio, color = grupo, group = grupo)) +
-    geom_line(linewidth = 0.75, alpha = 0.9) +
-    labs(x = NULL, y = "Rn medio diario (W m⁻²)", color = "Parcela") +
-    theme_minimal(base_size = 13)
-
-  p_rn
-} else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de radiación neta para graficar.</div>")
-}
+#| label: fig-temp-superficie
+#| fig-height: 5.5
+#| echo: false
+plot_variable("temp_superficie", "Temperatura superficial", "Temperatura superficial (°C)")
 ```
 
-## Componentes del balance energético
+## Velocidad del viento
 
 ```{r}
-#| label: fig-componentes
-#| fig-height: 6
+#| label: fig-velocidad-viento
+#| fig-height: 5.5
+#| echo: false
+plot_variable("velocidad_viento", "Velocidad del viento", "Velocidad del viento (m s⁻¹)")
+```
 
-componentes <- diario |>
-  select(grupo, fecha, LE_medio, H_medio, Rn_medio, G_medio) |>
-  pivot_longer(c(LE_medio, H_medio, Rn_medio, G_medio),
-               names_to = "Componente", values_to = "Valor") |>
-  filter(!is.na(fecha), !is.na(Valor)) |>
-  mutate(Componente = recode(Componente,
-                             LE_medio = "LE",
-                             H_medio  = "H",
-                             Rn_medio = "Rn",
-                             G_medio  = "G"))
+## Dirección del viento
+
+```{r}
+#| label: fig-direccion-viento
+#| fig-height: 5.5
+#| echo: false
+plot_variable("WindDir", "Dirección del viento", "Dirección del viento (°)")
+```
+
+## Temperatura del aire a 2 m
+
+```{r}
+#| label: fig-temp-aire
+#| fig-height: 5.5
+#| echo: false
+plot_variable("temp_aire", "Temperatura del aire a 2 m", "Temperatura del aire a 2 m (°C)")
+```
+
+## Humedad relativa del aire
+
+```{r}
+#| label: fig-hr
+#| fig-height: 5.5
+#| echo: false
+plot_variable("HR", "Humedad relativa del aire", "Humedad relativa (%)")
+```
+
+## Flujo de calor del suelo
+
+```{r}
+#| label: fig-g
+#| fig-height: 5.5
+#| echo: false
+plot_variable("G", "Flujo de calor del suelo", "G (W m⁻²)")
+```
+
+## Humedad del suelo a 5 cm
+
+```{r}
+#| label: fig-humedad-5cm
+#| fig-height: 5.5
+#| echo: false
+plot_variable("humedad_volumetrica", "Humedad del suelo a 5 cm", "Humedad volumétrica a 5 cm (m³ m⁻³)")
+```
+
+## Humedad del suelo a 40 cm
+
+```{r}
+#| label: fig-humedad-40cm
+#| fig-height: 5.5
+#| echo: false
+plot_variable("SWC_40CM", "Humedad del suelo a 40 cm", "Humedad volumétrica a 40 cm (m³ m⁻³)")
+```
+
+## Flujo de calor latente
+
+```{r}
+#| label: fig-le-final
+#| fig-height: 5.5
+#| echo: false
+plot_variable("LE_final", "Flujo de calor latente", "LE (W m⁻²)")
+```
+
+## Flujo de calor sensible
+
+```{r}
+#| label: fig-h-final
+#| fig-height: 5.5
+#| echo: false
+plot_variable("H_final", "Flujo de calor sensible", "H (W m⁻²)")
+```
+
+## Evapotranspiración horaria
+
+```{r}
+#| label: fig-et
+#| fig-height: 5.5
+#| echo: false
+plot_variable("ET_mm_h", "Evapotranspiración diaria acumulada a partir de registros horarios", "ET acumulada diaria (mm día⁻¹)", agregacion = "sum")
+```
+
+## Componentes principales del balance energético
+
+```{r}
+#| label: fig-componentes-balance
+#| fig-height: 7
+#| echo: false
+
+componentes <- bind_rows(
+  preparar_diario(datos, "Rn", "mean") |> mutate(componente = "Rn"),
+  preparar_diario(datos, "G", "mean") |> mutate(componente = "G"),
+  preparar_diario(datos, "LE_final", "mean") |> mutate(componente = "LE"),
+  preparar_diario(datos, "H_final", "mean") |> mutate(componente = "H")
+)
 
 if (hay_datos(componentes)) {
-  p_comp <- ggplot(componentes, aes(x = fecha, y = Valor, color = Componente, group = Componente)) +
+  ggplot(componentes, aes(x = fecha, y = valor, color = componente, group = componente)) +
     geom_line(linewidth = 0.55, alpha = 0.85) +
     facet_wrap(~grupo, scales = "free_y") +
-    labs(x = NULL, y = "Flujo medio diario (W m⁻²)", color = NULL) +
-    theme_minimal(base_size = 13)
-
-  p_comp
+    labs(
+      title = "Componentes diarios del balance energético",
+      x = "Fecha",
+      y = "Flujo medio diario (W m⁻²)",
+      color = "Componente"
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(
+      plot.title = element_text(face = "bold", size = 15),
+      legend.position = "bottom"
+    )
 } else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes para graficar los componentes del balance energético.</div>")
+  plot.new()
+  text(0.5, 0.5, "Aún no hay datos suficientes para graficar los componentes del balance energético.", cex = 1.1)
 }
 ```
 
-## Temperatura de superficie vs temperatura del aire
-
-```{r}
-#| label: fig-temp
-#| fig-height: 6
-
-temp_long <- diario |>
-  select(grupo, fecha, temp_aire, temp_superficie) |>
-  pivot_longer(c(temp_aire, temp_superficie), names_to = "variable", values_to = "valor") |>
-  filter(!is.na(fecha), !is.na(valor)) |>
-  mutate(variable = recode(variable,
-                           temp_aire = "Temperatura del aire",
-                           temp_superficie = "Temperatura superficial"))
-
-if (hay_datos(temp_long)) {
-  p_temp <- ggplot(temp_long, aes(x = fecha, y = valor, color = variable, group = variable)) +
-    geom_line(linewidth = 0.6, alpha = 0.85) +
-    facet_wrap(~grupo, scales = "free_y") +
-    labs(x = NULL, y = "Temperatura (°C)", color = NULL) +
-    theme_minimal(base_size = 13)
-
-  p_temp
-} else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de temperatura para graficar.</div>")
-}
-```
-
-## Humedad del suelo
-
-```{r}
-#| label: fig-humedad
-#| fig-height: 6
-
-df_hs <- diario |>
-  filter(!is.na(fecha), !is.na(humedad_suelo))
-
-if (hay_datos(df_hs)) {
-  p_hs <- ggplot(df_hs, aes(x = fecha, y = humedad_suelo, color = grupo, group = grupo)) +
-    geom_line(linewidth = 0.75, alpha = 0.9) +
-    labs(x = NULL, y = "Humedad volumétrica del suelo (m³ m⁻³)", color = "Parcela") +
-    theme_minimal(base_size = 13)
-
-  p_hs
-} else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de humedad de suelo para graficar.</div>")
-}
-```
-
-## Precipitación y ETo
-
-```{r}
-#| label: fig-agua-atmosfera
-#| fig-height: 5
-
-agua <- diario |>
-  group_by(fecha) |>
-  summarise(
-    lluvia = suppressWarnings(max(lluvia, na.rm = TRUE)),
-    ETo = suppressWarnings(mean(ETo, na.rm = TRUE)),
-    .groups = "drop"
-  ) |>
-  mutate(across(where(is.numeric), ~ ifelse(is.infinite(.x) | is.nan(.x), NA_real_, .x))) |>
-  pivot_longer(c(lluvia, ETo), names_to = "variable", values_to = "valor") |>
-  filter(!is.na(fecha), !is.na(valor)) |>
-  mutate(variable = recode(variable,
-                           lluvia = "Precipitación",
-                           ETo = "ETo"))
-
-if (hay_datos(agua)) {
-  p_agua <- ggplot(agua, aes(x = fecha, y = valor, color = variable, group = variable)) +
-    geom_line(linewidth = 0.75) +
-    labs(x = NULL, y = "mm día⁻¹", color = NULL) +
-    theme_minimal(base_size = 13)
-
-  p_agua
-} else {
-  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de precipitación o ETo para graficar.</div>")
-}
-```
-
-## Tabla exploratoria diaria
-
-```{r}
-#| label: tabla-diaria
-DT::datatable(
-  diario,
-  extensions = 'Buttons',
-  options = list(
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel'),
-    pageLength = 12,
-    scrollX = TRUE
-  )
-)
-```

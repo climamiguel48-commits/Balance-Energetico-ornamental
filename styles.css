@@ -62,3 +62,34 @@ body { color: var(--puma-ink); background: #fbfcfa; }
 .timeline strong { color: var(--puma-green); }
 .status-dev { background: repeating-linear-gradient(45deg, #ffffff, #ffffff 12px, #f4ecd9 12px, #f4ecd9 24px); }
 .table-note { color: var(--puma-muted); font-size: .95rem; }
+
+/* Ajuste de pesos tipográficos: títulos marcados, texto normal */
+main p,
+main li,
+main td,
+main th,
+.puma-card,
+.puma-card p,
+.puma-card li {
+  font-weight: 400;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+.section-title,
+.puma-card h3,
+.metric,
+.metric-small,
+.navbar-title,
+.navbar-nav .nav-link {
+  font-weight: 750;
+}
+
+strong,
+b {
+  font-weight: 650;
+}

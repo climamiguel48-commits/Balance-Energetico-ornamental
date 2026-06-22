@@ -49,186 +49,95 @@
     "text": "Registros horarios\n\n13.490\n\n\n\nFecha inicial\n\n2025-09-02\n\n\n\nFecha final\n\n2026-05-02\n\n\n\nParcelas\n\n3"
   },
   {
-    "objectID": "resultados.html#flujo-de-calor-latente-preliminar",
-    "href": "resultados.html#flujo-de-calor-latente-preliminar",
+    "objectID": "resultados.html#disponibilidad-de-variables",
+    "href": "resultados.html#disponibilidad-de-variables",
     "title": "Resultados preliminares",
-    "section": "Flujo de calor latente preliminar",
-    "text": "Flujo de calor latente preliminar\n\n\nCode\ndf_le &lt;- diario |&gt;\n  filter(!is.na(fecha), !is.na(LE_medio)) |&gt;\n  mutate(\n    tooltip = paste0(\n      \"Parcela: \", grupo,\n      \"&lt;br&gt;Fecha: \", fecha,\n      \"&lt;br&gt;LE: \", round(LE_medio, 2), \" W m⁻²\"\n    )\n  )\n\nif (hay_datos(df_le)) {\n  p_le &lt;- ggplot(df_le, aes(x = fecha, y = LE_medio, color = grupo, group = grupo)) +\n    geom_line(linewidth = 0.75, alpha = 0.9) +\n    labs(x = NULL, y = \"LE medio diario (W m⁻²)\", color = \"Parcela\") +\n    theme_minimal(base_size = 13)\n\n  p_le\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes de LE para graficar.&lt;/div&gt;\")\n}\n\n\n\n\nAún no hay datos suficientes de LE para graficar.\n\n\nFigure 1"
+    "section": "Disponibilidad de variables",
+    "text": "Disponibilidad de variables\n\n\n\n\n\nVariable\nRegistros válidos\nParcelas con datos\n\n\n\n\ntemp_superficie\n13472\nCAE1, CAE2, Exótico\n\n\nvelocidad_viento\n13490\nCAE1, CAE2, Exótico\n\n\nWindDir\n13490\nCAE1, CAE2, Exótico\n\n\ntemp_aire\n13490\nCAE1, CAE2, Exótico\n\n\nHR\n13490\nCAE1, CAE2, Exótico\n\n\nG\n13487\nCAE1, CAE2, Exótico\n\n\nhumedad_volumetrica\n13490\nCAE1, CAE2, Exótico\n\n\nSWC_40CM\n13490\nCAE1, CAE2, Exótico\n\n\nLE_final\n13467\nCAE1, CAE2, Exótico\n\n\nH_final\n13468\nCAE1, CAE2, Exótico\n\n\nET_mm_h\n13467\nCAE1, CAE2, Exótico"
   },
   {
-    "objectID": "resultados.html#radiación-neta",
-    "href": "resultados.html#radiación-neta",
+    "objectID": "resultados.html#temperatura-superficial",
+    "href": "resultados.html#temperatura-superficial",
     "title": "Resultados preliminares",
-    "section": "Radiación neta",
-    "text": "Radiación neta\n\n\nCode\ndf_rn &lt;- diario |&gt;\n  filter(!is.na(fecha), !is.na(Rn_medio)) |&gt;\n  mutate(\n    tooltip = paste0(\n      \"Parcela: \", grupo,\n      \"&lt;br&gt;Fecha: \", fecha,\n      \"&lt;br&gt;Rn: \", round(Rn_medio, 2), \" W m⁻²\"\n    )\n  )\n\nif (hay_datos(df_rn)) {\n  p_rn &lt;- ggplot(df_rn, aes(x = fecha, y = Rn_medio, color = grupo, group = grupo)) +\n    geom_line(linewidth = 0.75, alpha = 0.9) +\n    labs(x = NULL, y = \"Rn medio diario (W m⁻²)\", color = \"Parcela\") +\n    theme_minimal(base_size = 13)\n\n  p_rn\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes de radiación neta para graficar.&lt;/div&gt;\")\n}\n\n\n\n\n\n\n\n\nFigure 2"
+    "section": "Temperatura superficial",
+    "text": "Temperatura superficial\n\n\n\n\n\n\n\n\nFigure 1"
   },
   {
-    "objectID": "resultados.html#componentes-del-balance-energético",
-    "href": "resultados.html#componentes-del-balance-energético",
+    "objectID": "resultados.html#velocidad-del-viento",
+    "href": "resultados.html#velocidad-del-viento",
     "title": "Resultados preliminares",
-    "section": "Componentes del balance energético",
-    "text": "Componentes del balance energético\n\n\nCode\ncomponentes &lt;- diario |&gt;\n  select(grupo, fecha, LE_medio, H_medio, Rn_medio, G_medio) |&gt;\n  pivot_longer(c(LE_medio, H_medio, Rn_medio, G_medio),\n               names_to = \"Componente\", values_to = \"Valor\") |&gt;\n  filter(!is.na(fecha), !is.na(Valor)) |&gt;\n  mutate(Componente = recode(Componente,\n                             LE_medio = \"LE\",\n                             H_medio  = \"H\",\n                             Rn_medio = \"Rn\",\n                             G_medio  = \"G\"))\n\nif (hay_datos(componentes)) {\n  p_comp &lt;- ggplot(componentes, aes(x = fecha, y = Valor, color = Componente, group = Componente)) +\n    geom_line(linewidth = 0.55, alpha = 0.85) +\n    facet_wrap(~grupo, scales = \"free_y\") +\n    labs(x = NULL, y = \"Flujo medio diario (W m⁻²)\", color = NULL) +\n    theme_minimal(base_size = 13)\n\n  p_comp\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes para graficar los componentes del balance energético.&lt;/div&gt;\")\n}\n\n\n\n\n\n\n\n\nFigure 3"
+    "section": "Velocidad del viento",
+    "text": "Velocidad del viento\n\n\n\n\n\n\n\n\nFigure 2"
   },
   {
-    "objectID": "resultados.html#temperatura-de-superficie-vs-temperatura-del-aire",
-    "href": "resultados.html#temperatura-de-superficie-vs-temperatura-del-aire",
+    "objectID": "resultados.html#dirección-del-viento",
+    "href": "resultados.html#dirección-del-viento",
     "title": "Resultados preliminares",
-    "section": "Temperatura de superficie vs temperatura del aire",
-    "text": "Temperatura de superficie vs temperatura del aire\n\n\nCode\ntemp_long &lt;- diario |&gt;\n  select(grupo, fecha, temp_aire, temp_superficie) |&gt;\n  pivot_longer(c(temp_aire, temp_superficie), names_to = \"variable\", values_to = \"valor\") |&gt;\n  filter(!is.na(fecha), !is.na(valor)) |&gt;\n  mutate(variable = recode(variable,\n                           temp_aire = \"Temperatura del aire\",\n                           temp_superficie = \"Temperatura superficial\"))\n\nif (hay_datos(temp_long)) {\n  p_temp &lt;- ggplot(temp_long, aes(x = fecha, y = valor, color = variable, group = variable)) +\n    geom_line(linewidth = 0.6, alpha = 0.85) +\n    facet_wrap(~grupo, scales = \"free_y\") +\n    labs(x = NULL, y = \"Temperatura (°C)\", color = NULL) +\n    theme_minimal(base_size = 13)\n\n  p_temp\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes de temperatura para graficar.&lt;/div&gt;\")\n}\n\n\n\n\n\n\n\n\nFigure 4"
+    "section": "Dirección del viento",
+    "text": "Dirección del viento\n\n\n\n\n\n\n\n\nFigure 3"
   },
   {
-    "objectID": "resultados.html#humedad-del-suelo",
-    "href": "resultados.html#humedad-del-suelo",
+    "objectID": "resultados.html#temperatura-del-aire-a-2-m",
+    "href": "resultados.html#temperatura-del-aire-a-2-m",
     "title": "Resultados preliminares",
-    "section": "Humedad del suelo",
-    "text": "Humedad del suelo\n\n\nCode\ndf_hs &lt;- diario |&gt;\n  filter(!is.na(fecha), !is.na(humedad_suelo))\n\nif (hay_datos(df_hs)) {\n  p_hs &lt;- ggplot(df_hs, aes(x = fecha, y = humedad_suelo, color = grupo, group = grupo)) +\n    geom_line(linewidth = 0.75, alpha = 0.9) +\n    labs(x = NULL, y = \"Humedad volumétrica del suelo (m³ m⁻³)\", color = \"Parcela\") +\n    theme_minimal(base_size = 13)\n\n  p_hs\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes de humedad de suelo para graficar.&lt;/div&gt;\")\n}\n\n\n\n\n\n\n\n\nFigure 5"
+    "section": "Temperatura del aire a 2 m",
+    "text": "Temperatura del aire a 2 m\n\n\n\n\n\n\n\n\nFigure 4"
   },
   {
-    "objectID": "resultados.html#precipitación-y-eto",
-    "href": "resultados.html#precipitación-y-eto",
+    "objectID": "resultados.html#humedad-relativa-del-aire",
+    "href": "resultados.html#humedad-relativa-del-aire",
     "title": "Resultados preliminares",
-    "section": "Precipitación y ETo",
-    "text": "Precipitación y ETo\n\n\nCode\nagua &lt;- diario |&gt;\n  group_by(fecha) |&gt;\n  summarise(\n    lluvia = suppressWarnings(max(lluvia, na.rm = TRUE)),\n    ETo = suppressWarnings(mean(ETo, na.rm = TRUE)),\n    .groups = \"drop\"\n  ) |&gt;\n  mutate(across(where(is.numeric), ~ ifelse(is.infinite(.x) | is.nan(.x), NA_real_, .x))) |&gt;\n  pivot_longer(c(lluvia, ETo), names_to = \"variable\", values_to = \"valor\") |&gt;\n  filter(!is.na(fecha), !is.na(valor)) |&gt;\n  mutate(variable = recode(variable,\n                           lluvia = \"Precipitación\",\n                           ETo = \"ETo\"))\n\nif (hay_datos(agua)) {\n  p_agua &lt;- ggplot(agua, aes(x = fecha, y = valor, color = variable, group = variable)) +\n    geom_line(linewidth = 0.75) +\n    labs(x = NULL, y = \"mm día⁻¹\", color = NULL) +\n    theme_minimal(base_size = 13)\n\n  p_agua\n} else {\n  htmltools::HTML(\"&lt;div class='puma-card'&gt;Aún no hay datos suficientes de precipitación o ETo para graficar.&lt;/div&gt;\")\n}\n\n\n\n\n\n\n\n\nFigure 6"
+    "section": "Humedad relativa del aire",
+    "text": "Humedad relativa del aire\n\n\n\n\n\n\n\n\nFigure 5"
   },
   {
-    "objectID": "resultados.html#tabla-exploratoria-diaria",
-    "href": "resultados.html#tabla-exploratoria-diaria",
+    "objectID": "resultados.html#flujo-de-calor-del-suelo",
+    "href": "resultados.html#flujo-de-calor-del-suelo",
     "title": "Resultados preliminares",
-    "section": "Tabla exploratoria diaria",
-    "text": "Tabla exploratoria diaria\n\n\nCode\nDT::datatable(\n  diario,\n  extensions = 'Buttons',\n  options = list(\n    dom = 'Bfrtip',\n    buttons = c('copy', 'csv', 'excel'),\n    pageLength = 12,\n    scrollX = TRUE\n  )\n)"
+    "section": "Flujo de calor del suelo",
+    "text": "Flujo de calor del suelo\n\n\n\n\n\n\n\n\nFigure 6"
   },
   {
-    "objectID": "pumahuida_quarto_website/teledeteccion.html",
-    "href": "pumahuida_quarto_website/teledeteccion.html",
-    "title": "Teledetección",
-    "section": "",
-    "text": "Esta sección queda preparada para incorporar los datos de teledetección cuando estén disponibles. Por ahora se han realizado algunas capturas, pero los productos procesados todavía no están incorporados al sitio."
+    "objectID": "resultados.html#humedad-del-suelo-a-5-cm",
+    "href": "resultados.html#humedad-del-suelo-a-5-cm",
+    "title": "Resultados preliminares",
+    "section": "Humedad del suelo a 5 cm",
+    "text": "Humedad del suelo a 5 cm\n\n\n\n\n\n\n\n\nFigure 7"
   },
   {
-    "objectID": "pumahuida_quarto_website/teledeteccion.html#datos-esperados",
-    "href": "pumahuida_quarto_website/teledeteccion.html#datos-esperados",
-    "title": "Teledetección",
-    "section": "Datos esperados",
-    "text": "Datos esperados\n\n\nNDVI / EVI\nÍndices de vegetación para monitorear vigor, cobertura y cambios fenológicos entre parcelas.\n\n\nTemperatura superficial\nInformación térmica para alimentar modelos de balance energético y detectar estrés hídrico.\n\n\nLiDAR\nAltura, volumen y estructura tridimensional del dosel para estimar biomasa y normalizar resultados.\n\n\nModelos ET\nImplementación futura de RS-PM y TSEB-PT calibrados con datos locales."
+    "objectID": "resultados.html#humedad-del-suelo-a-40-cm",
+    "href": "resultados.html#humedad-del-suelo-a-40-cm",
+    "title": "Resultados preliminares",
+    "section": "Humedad del suelo a 40 cm",
+    "text": "Humedad del suelo a 40 cm\n\n\n\n\n\n\n\n\nFigure 8"
   },
   {
-    "objectID": "pumahuida_quarto_website/teledeteccion.html#flujo-de-trabajo-previsto",
-    "href": "pumahuida_quarto_website/teledeteccion.html#flujo-de-trabajo-previsto",
-    "title": "Teledetección",
-    "section": "Flujo de trabajo previsto",
-    "text": "Flujo de trabajo previsto\n\nProcesamiento radiométrico y geométrico de imágenes.\nGeneración de ortomosaicos multiespectrales y térmicos.\nCálculo de índices NDVI, EVI y temperatura superficial.\nExtracción de estadísticas por parcela.\nIntegración con datos meteorológicos y balance energético.\nEvaluación de modelos RS-PM y TSEB-PT contra mediciones de referencia."
+    "objectID": "resultados.html#flujo-de-calor-latente",
+    "href": "resultados.html#flujo-de-calor-latente",
+    "title": "Resultados preliminares",
+    "section": "Flujo de calor latente",
+    "text": "Flujo de calor latente\n\n\n\n\n\n\n\n\nFigure 9"
   },
   {
-    "objectID": "pumahuida_quarto_website/teledeteccion.html#visualizaciones-futuras",
-    "href": "pumahuida_quarto_website/teledeteccion.html#visualizaciones-futuras",
-    "title": "Teledetección",
-    "section": "Visualizaciones futuras",
-    "text": "Visualizaciones futuras\nCuando estén disponibles los productos, esta página incluirá:\n\nMapas interactivos por fecha de vuelo.\nComparación temporal de NDVI y EVI.\nMapas térmicos de temperatura de copa y suelo.\nEstimación espacial de ET por parcela.\nComparación entre ET medida y ET modelada.\n\n\n\n\n\n\n\nNote\n\n\n\nEsta sección está diseñada para crecer sin rehacer el sitio. Cuando tengas los productos de dron, se agregan a una carpeta data/remote_sensing/ y se conectan aquí."
+    "objectID": "resultados.html#flujo-de-calor-sensible",
+    "href": "resultados.html#flujo-de-calor-sensible",
+    "title": "Resultados preliminares",
+    "section": "Flujo de calor sensible",
+    "text": "Flujo de calor sensible\n\n\n\n\n\n\n\n\nFigure 10"
   },
   {
-    "objectID": "pumahuida_quarto_website/proyecto.html",
-    "href": "pumahuida_quarto_website/proyecto.html",
-    "title": "Proyecto doctoral",
-    "section": "",
-    "text": "La escasez de agua dulce en Chile central y la presión del riego urbano hacen necesario conocer, con datos cuantitativos, cuánto consumen realmente las especies ornamentales utilizadas en áreas verdes. El proyecto compara comunidades vegetales nativas CAE1 y CAE2 con especies exóticas tradicionales, usando mediciones de campo y modelos físicos de evapotranspiración.\n\n\n\nEl paisajismo urbano sigue dependiendo de especies y criterios de riego que no siempre responden al contexto de sequía prolongada.\n\n\n\nFaltan datos locales y comparables sobre requerimientos hídricos reales de comunidades ornamentales nativas y exóticas.\n\n\n\nGenerar coeficientes de paisajismo y herramientas de monitoreo para diseñar áreas verdes más eficientes y resilientes."
+    "objectID": "resultados.html#evapotranspiración-horaria",
+    "href": "resultados.html#evapotranspiración-horaria",
+    "title": "Resultados preliminares",
+    "section": "Evapotranspiración horaria",
+    "text": "Evapotranspiración horaria\n\n\n\n\n\n\n\n\nFigure 11"
   },
   {
-    "objectID": "pumahuida_quarto_website/proyecto.html#planteamiento-general",
-    "href": "pumahuida_quarto_website/proyecto.html#planteamiento-general",
-    "title": "Proyecto doctoral",
-    "section": "",
-    "text": "La escasez de agua dulce en Chile central y la presión del riego urbano hacen necesario conocer, con datos cuantitativos, cuánto consumen realmente las especies ornamentales utilizadas en áreas verdes. El proyecto compara comunidades vegetales nativas CAE1 y CAE2 con especies exóticas tradicionales, usando mediciones de campo y modelos físicos de evapotranspiración.\n\n\n\nEl paisajismo urbano sigue dependiendo de especies y criterios de riego que no siempre responden al contexto de sequía prolongada.\n\n\n\nFaltan datos locales y comparables sobre requerimientos hídricos reales de comunidades ornamentales nativas y exóticas.\n\n\n\nGenerar coeficientes de paisajismo y herramientas de monitoreo para diseñar áreas verdes más eficientes y resilientes."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/proyecto.html#hipótesis",
-    "href": "pumahuida_quarto_website/proyecto.html#hipótesis",
-    "title": "Proyecto doctoral",
-    "section": "Hipótesis",
-    "text": "Hipótesis\nLa integración de balance energético, balance hídrico y teledetección calibrada localmente permitirá estimar con precisión los requerimientos hídricos y coeficientes de paisajismo de comunidades ornamentales. Se espera que los grupos nativos CAE1 y CAE2 presenten menores requerimientos hídricos y mayor eficiencia en el uso del agua que las especies exóticas."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/proyecto.html#objetivo-general",
-    "href": "pumahuida_quarto_website/proyecto.html#objetivo-general",
-    "title": "Proyecto doctoral",
-    "section": "Objetivo general",
-    "text": "Objetivo general\nDesarrollar un marco metodológico integrado que combine enfoques de balance energético, balance hídrico y teledetección para cuantificar los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y exóticas bajo condiciones urbanas heterogéneas."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/proyecto.html#objetivos-específicos",
-    "href": "pumahuida_quarto_website/proyecto.html#objetivos-específicos",
-    "title": "Proyecto doctoral",
-    "section": "Objetivos específicos",
-    "text": "Objetivos específicos\n\nCuantificar el consumo hídrico de especies nativas y exóticas mediante modelos de balance energético.\nValidar modelos derivados de sensores remotos para estimar demandas hídricas en condiciones reales de paisajismo urbano.\nDeterminar coeficientes de paisajismo para especies exóticas, CAE1 y CAE2 bajo clima semiárido chileno.\nEstablecer demandas hídricas de pasto alfombra y cubresuelo nativo mediante lisimetría de pesada."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/proyecto.html#línea-de-tiempo",
-    "href": "pumahuida_quarto_website/proyecto.html#línea-de-tiempo",
-    "title": "Proyecto doctoral",
-    "section": "Línea de tiempo",
-    "text": "Línea de tiempo\n\n\nAgosto 2025: instalación operativa de sensores y comienzo del registro continuo.\n\n\n2025–2026: monitoreo horario de parcelas, estación meteorológica y Eddy Covariance.\n\n\n2026: integración preliminar de resultados y visualización pública de datos.\n\n\nPróxima fase: incorporación de vuelos de dron, índices espectrales, temperatura superficial y LiDAR."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html",
-    "href": "pumahuida_quarto_website/metodologia.html",
-    "title": "Metodología",
-    "section": "",
-    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#enfoque-general",
-    "href": "pumahuida_quarto_website/metodologia.html#enfoque-general",
-    "title": "Metodología",
-    "section": "",
-    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#balance-energético",
-    "href": "pumahuida_quarto_website/metodologia.html#balance-energético",
-    "title": "Metodología",
-    "section": "Balance energético",
-    "text": "Balance energético\nLa evapotranspiración se estima a partir del balance de energía:\n\\[ R_n = LE + H + G \\]\nPor despeje:\n\\[ LE = R_n - H - G \\]\nLuego, el flujo de calor latente se transforma a lámina de agua evaporada o transpirada mediante el calor latente de vaporización.\n\n\nRn\nRadiación neta medida con radiómetros instalados sobre las parcelas.\n\n\nG\nFlujo de calor del suelo medido con platos de flujo y corregido por almacenamiento térmico.\n\n\nH\nFlujo de calor sensible estimado a partir de temperatura superficial, temperatura del aire y resistencia aerodinámica.\n\n\nLE / ET\nFlujo de calor latente estimado como residual del balance energético y convertido a evapotranspiración."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#instrumentación-principal",
-    "href": "pumahuida_quarto_website/metodologia.html#instrumentación-principal",
-    "title": "Metodología",
-    "section": "Instrumentación principal",
-    "text": "Instrumentación principal"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#calibración-con-eddy-covariance",
-    "href": "pumahuida_quarto_website/metodologia.html#calibración-con-eddy-covariance",
-    "title": "Metodología",
-    "section": "Calibración con Eddy Covariance",
-    "text": "Calibración con Eddy Covariance\nEl sistema de balance energético será calibrado mediante comparación con flujos medidos por Eddy Covariance. La evaluación considera control de calidad de datos, cierre energético y métricas estadísticas como MBE, MAE, RMSE, R² y NSE."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#programación-de-riego",
-    "href": "pumahuida_quarto_website/metodologia.html#programación-de-riego",
-    "title": "Metodología",
-    "section": "Programación de riego",
-    "text": "Programación de riego\nEl riego se maneja por goteo y agotamiento del agua fácilmente aprovechable. La programación considera capacidad de campo, punto de marchitez permanente, densidad aparente, profundidad radicular, pedregosidad, porcentaje de suelo mojado y umbral de riego."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/metodologia.html#lisimetría",
-    "href": "pumahuida_quarto_website/metodologia.html#lisimetría",
-    "title": "Metodología",
-    "section": "Lisimetría",
-    "text": "Lisimetría\nEn Fundación AgroUC se miden demandas hídricas de pasto alfombra y cubresuelo nativo con lisímetros de pesada. La variación de masa se transforma a lámina de agua, permitiendo estimar consumo neto y coeficientes de paisajismo."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/datos.html",
-    "href": "pumahuida_quarto_website/datos.html",
-    "title": "Descarga de datos",
-    "section": "",
-    "text": "Los archivos se pueden descargar directamente desde esta sección. Cuando actualices las bases cada 15 días, basta con reemplazar los archivos dentro de la carpeta data/ manteniendo los mismos nombres."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/datos.html#recomendación-para-actualización-quincenal",
-    "href": "pumahuida_quarto_website/datos.html#recomendación-para-actualización-quincenal",
-    "title": "Descarga de datos",
-    "section": "Recomendación para actualización quincenal",
-    "text": "Recomendación para actualización quincenal\n\nReemplazar el Excel correspondiente dentro de data/.\nMantener exactamente el mismo nombre del archivo.\nEjecutar quarto render.\nSubir los cambios a GitHub.\n\n\n\n\n\n\n\nNote\n\n\n\nLa lectura de datos fue ajustada para evitar errores por columnas con tipos mixtos entre archivos, como RECORD. El sitio lee las bases inicialmente como texto y luego convierte solo las variables necesarias para graficar."
+    "objectID": "resultados.html#componentes-principales-del-balance-energético",
+    "href": "resultados.html#componentes-principales-del-balance-energético",
+    "title": "Resultados preliminares",
+    "section": "Componentes principales del balance energético",
+    "text": "Componentes principales del balance energético\n\n\n\n\n\n\n\n\nFigure 12"
   },
   {
     "objectID": "parcelas.html",
@@ -261,21 +170,21 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Demanda hídrica de vegetación ornamental nativa",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
     "section": "",
     "text": "Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y especies exóticas en áreas verdes de clima mediterráneo semiárido de Chile.\nBalance energético Eddy Covariance Lisimetría Knl / Kl Teledetección en desarrollo"
   },
   {
     "objectID": "index.html#resumen-del-proyecto",
     "href": "index.html#resumen-del-proyecto",
-    "title": "Demanda hídrica de vegetación ornamental nativa",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
     "section": "Resumen del proyecto",
     "text": "Resumen del proyecto\nLa investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución."
   },
   {
     "objectID": "index.html#navegación-rápida",
     "href": "index.html#navegación-rápida",
-    "title": "Demanda hídrica de vegetación ornamental nativa",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
     "section": "Navegación rápida",
     "text": "Navegación rápida\n\n\n🌿 Proyecto\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n\n\n📍 Zona de estudio\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n\n\n🧪 Metodología\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n\n\n📈 Resultados\nGráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.\n\n\n🛰 Teledetección\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.\n\n\n📂 Datos abiertos\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito. Ir a datos"
   },
@@ -383,153 +292,6 @@
     "title": "Proyecto doctoral",
     "section": "Línea de tiempo",
     "text": "Línea de tiempo\n\n\nAgosto 2025: instalación operativa de sensores y comienzo del registro continuo.\n\n\n2025–2026: monitoreo horario de parcelas, estación meteorológica y Eddy Covariance.\n\n\n2026: integración preliminar de resultados y visualización pública de datos.\n\n\nPróxima fase: incorporación de vuelos de dron, índices espectrales, temperatura superficial y LiDAR."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/index.html",
-    "href": "pumahuida_quarto_website/index.html",
-    "title": "Proyecto Pumahuida",
-    "section": "",
-    "text": "Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y especies exóticas en áreas verdes de clima mediterráneo semiárido de Chile.\nBalance energético Eddy Covariance Lisimetría Knl / Kl Teledetección en desarrollo"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/index.html#resumen-del-proyecto",
-    "href": "pumahuida_quarto_website/index.html#resumen-del-proyecto",
-    "title": "Proyecto Pumahuida",
-    "section": "Resumen del proyecto",
-    "text": "Resumen del proyecto\nLa investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/index.html#navegación-rápida",
-    "href": "pumahuida_quarto_website/index.html#navegación-rápida",
-    "title": "Proyecto Pumahuida",
-    "section": "Navegación rápida",
-    "text": "Navegación rápida\n\n\n🌿 Proyecto\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n\n\n📍 Zona de estudio\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n\n\n🧪 Metodología\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n\n\n📈 Resultados\nGráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.\n\n\n🛰 Teledetección\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.\n\n\n📂 Datos abiertos\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito. Ir a datos"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/parcelas.html",
-    "href": "pumahuida_quarto_website/parcelas.html",
-    "title": "Parcelas experimentales",
-    "section": "",
-    "text": "El ensayo principal se desarrolla en tres parcelas que representan estrategias contrastantes de paisajismo: una parcela con especies exóticas tradicionales y dos parcelas con especies nativas agrupadas en categorías agroecológicas CAE1 y CAE2.\n\n\n\n\n250 m²\n\nEspecies ornamentales de uso frecuente en áreas verdes chilenas.\n\n\n\n\n250 m²\n\nEspecies nativas adaptadas a baja disponibilidad hídrica.\n\n\n\n\n1000 m²\n\nEspecies nativas con mayor superficie experimental e instalación de torre Eddy Covariance."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/parcelas.html#diseño-del-ensayo",
-    "href": "pumahuida_quarto_website/parcelas.html#diseño-del-ensayo",
-    "title": "Parcelas experimentales",
-    "section": "",
-    "text": "El ensayo principal se desarrolla en tres parcelas que representan estrategias contrastantes de paisajismo: una parcela con especies exóticas tradicionales y dos parcelas con especies nativas agrupadas en categorías agroecológicas CAE1 y CAE2.\n\n\n\n\n250 m²\n\nEspecies ornamentales de uso frecuente en áreas verdes chilenas.\n\n\n\n\n250 m²\n\nEspecies nativas adaptadas a baja disponibilidad hídrica.\n\n\n\n\n1000 m²\n\nEspecies nativas con mayor superficie experimental e instalación de torre Eddy Covariance."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/parcelas.html#grupos-vegetales",
-    "href": "pumahuida_quarto_website/parcelas.html#grupos-vegetales",
-    "title": "Parcelas experimentales",
-    "section": "Grupos vegetales",
-    "text": "Grupos vegetales"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/parcelas.html#resumen-por-grupo",
-    "href": "pumahuida_quarto_website/parcelas.html#resumen-por-grupo",
-    "title": "Parcelas experimentales",
-    "section": "Resumen por grupo",
-    "text": "Resumen por grupo"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html",
-    "href": "pumahuida_quarto_website/resultados.html",
-    "title": "Resultados preliminares",
-    "section": "",
-    "text": "Registros horarios\n\n13.490\n\n\n\nFecha inicial\n\n2025-09-02\n\n\n\nFecha final\n\n2026-05-02\n\n\n\nParcelas\n\n3"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#lectura-general-de-los-datos",
-    "href": "pumahuida_quarto_website/resultados.html#lectura-general-de-los-datos",
-    "title": "Resultados preliminares",
-    "section": "",
-    "text": "Registros horarios\n\n13.490\n\n\n\nFecha inicial\n\n2025-09-02\n\n\n\nFecha final\n\n2026-05-02\n\n\n\nParcelas\n\n3"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#flujo-de-calor-latente-preliminar",
-    "href": "pumahuida_quarto_website/resultados.html#flujo-de-calor-latente-preliminar",
-    "title": "Resultados preliminares",
-    "section": "Flujo de calor latente preliminar",
-    "text": "Flujo de calor latente preliminar\n\n\nCode\np_le &lt;- diario |&gt;\n  filter(!is.na(LE_medio)) |&gt;\n  ggplot(aes(fecha, LE_medio, color = grupo,\n             text = paste(\"Parcela:\", grupo, \"&lt;br&gt;Fecha:\", fecha, \"&lt;br&gt;LE:\", round(LE_medio, 2), \"W m-2\"))) +\n  geom_line(linewidth = 0.75, alpha = 0.9) +\n  labs(x = NULL, y = \"LE medio diario (W m⁻²)\", color = \"Parcela\") +\n  theme_minimal(base_size = 13)\np_le\n\n\n\n\n\n\n\n\nFigure 1"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#radiación-neta",
-    "href": "pumahuida_quarto_website/resultados.html#radiación-neta",
-    "title": "Resultados preliminares",
-    "section": "Radiación neta",
-    "text": "Radiación neta\n\n\nCode\np_rn &lt;- diario |&gt;\n  filter(!is.na(Rn_medio)) |&gt;\n  ggplot(aes(fecha, Rn_medio, color = grupo,\n             text = paste(\"Parcela:\", grupo, \"&lt;br&gt;Fecha:\", fecha, \"&lt;br&gt;Rn:\", round(Rn_medio, 2), \"W m-2\"))) +\n  geom_line(linewidth = 0.75, alpha = 0.9) +\n  labs(x = NULL, y = \"Rn medio diario (W m⁻²)\", color = \"Parcela\") +\n  theme_minimal(base_size = 13)\np_rn\n\n\n\n\n\n\n\n\nFigure 2"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#componentes-del-balance-energético",
-    "href": "pumahuida_quarto_website/resultados.html#componentes-del-balance-energético",
-    "title": "Resultados preliminares",
-    "section": "Componentes del balance energético",
-    "text": "Componentes del balance energético\n\n\nCode\ncomponentes &lt;- diario |&gt;\n  select(grupo, fecha, LE_medio, H_medio, Rn_medio, G_medio) |&gt;\n  pivot_longer(c(LE_medio, H_medio, Rn_medio, G_medio), names_to = \"Componente\", values_to = \"Valor\") |&gt;\n  filter(!is.na(Valor))\n\np_comp &lt;- ggplot(componentes, aes(fecha, Valor, color = Componente)) +\n  geom_line(linewidth = 0.55, alpha = 0.85) +\n  facet_wrap(~grupo, scales = \"free_y\") +\n  labs(x = NULL, y = \"Flujo medio diario (W m⁻²)\", color = NULL) +\n  theme_minimal(base_size = 13)\np_comp\n\n\n\n\n\n\n\n\nFigure 3"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#temperatura-de-superficie-vs-temperatura-del-aire",
-    "href": "pumahuida_quarto_website/resultados.html#temperatura-de-superficie-vs-temperatura-del-aire",
-    "title": "Resultados preliminares",
-    "section": "Temperatura de superficie vs temperatura del aire",
-    "text": "Temperatura de superficie vs temperatura del aire\n\n\nCode\ntemp_long &lt;- diario |&gt;\n  select(grupo, fecha, temp_aire, temp_superficie) |&gt;\n  pivot_longer(c(temp_aire, temp_superficie), names_to = \"variable\", values_to = \"valor\") |&gt;\n  filter(!is.na(valor))\n\np_temp &lt;- ggplot(temp_long, aes(fecha, valor, color = variable)) +\n  geom_line(linewidth = 0.6, alpha = 0.85) +\n  facet_wrap(~grupo, scales = \"free_y\") +\n  labs(x = NULL, y = \"Temperatura (°C)\", color = NULL) +\n  theme_minimal(base_size = 13)\np_temp\n\n\n\n\n\n\n\n\nFigure 4"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#humedad-del-suelo",
-    "href": "pumahuida_quarto_website/resultados.html#humedad-del-suelo",
-    "title": "Resultados preliminares",
-    "section": "Humedad del suelo",
-    "text": "Humedad del suelo\n\n\nCode\np_hs &lt;- diario |&gt;\n  filter(!is.na(humedad_suelo)) |&gt;\n  ggplot(aes(fecha, humedad_suelo, color = grupo)) +\n  geom_line(linewidth = 0.75, alpha = 0.9) +\n  labs(x = NULL, y = \"Humedad volumétrica del suelo (m³ m⁻³)\", color = \"Parcela\") +\n  theme_minimal(base_size = 13)\np_hs\n\n\n\n\n\n\n\n\nFigure 5"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#precipitación-y-eto",
-    "href": "pumahuida_quarto_website/resultados.html#precipitación-y-eto",
-    "title": "Resultados preliminares",
-    "section": "Precipitación y ETo",
-    "text": "Precipitación y ETo\n\n\nCode\nagua &lt;- diario |&gt;\n  group_by(fecha) |&gt;\n  summarise(lluvia = max(lluvia, na.rm = TRUE), ETo = mean(ETo, na.rm = TRUE), .groups = \"drop\") |&gt;\n  mutate(across(where(is.numeric), ~ ifelse(is.infinite(.x) | is.nan(.x), NA_real_, .x))) |&gt;\n  pivot_longer(c(lluvia, ETo), names_to = \"variable\", values_to = \"valor\") |&gt;\n  filter(!is.na(valor))\n\np_agua &lt;- ggplot(agua, aes(fecha, valor, color = variable)) +\n  geom_line(linewidth = 0.75) +\n  labs(x = NULL, y = \"mm día⁻¹\", color = NULL) +\n  theme_minimal(base_size = 13)\np_agua\n\n\n\n\n\n\n\n\nFigure 6"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/resultados.html#tabla-exploratoria-diaria",
-    "href": "pumahuida_quarto_website/resultados.html#tabla-exploratoria-diaria",
-    "title": "Resultados preliminares",
-    "section": "Tabla exploratoria diaria",
-    "text": "Tabla exploratoria diaria\n\n\nCode\nDT::datatable(\n  diario,\n  extensions = 'Buttons',\n  options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel'), pageLength = 12, scrollX = TRUE)\n)"
-  },
-  {
-    "objectID": "pumahuida_quarto_website/zona-estudio.html",
-    "href": "pumahuida_quarto_website/zona-estudio.html",
-    "title": "Zona de estudio",
-    "section": "",
-    "text": "El proyecto se desarrolla en dos sitios de la Región Metropolitana de Santiago de Chile: el Vivero y Jardín Pumahuida, en Huechuraba, donde se ubican las parcelas experimentales de especies exóticas, CAE1 y CAE2; y la Fundación AgroUC, en Pirque, donde se desarrolla el ensayo con lisímetros de pesada.\n\n\n\n\nHuechuraba\n\nCarr. Gral. San Martín 7021, Región Metropolitana.\nCoordenadas aproximadas: -33.354, -70.691\nAltitud: 490,87 m s. n. m.\nUso experimental: parcelas de balance energético y torre Eddy Covariance.\n\n\n\n\nPirque\n\nValle del Maipo, Región Metropolitana.\nCoordenadas aproximadas: 33°40’25” S; 70°35’09” O\nAltitud: 661 m s. n. m.\nUso experimental: lisímetros de pesada para pasto alfombra y cubresuelo nativo."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/zona-estudio.html#localización-general",
-    "href": "pumahuida_quarto_website/zona-estudio.html#localización-general",
-    "title": "Zona de estudio",
-    "section": "",
-    "text": "El proyecto se desarrolla en dos sitios de la Región Metropolitana de Santiago de Chile: el Vivero y Jardín Pumahuida, en Huechuraba, donde se ubican las parcelas experimentales de especies exóticas, CAE1 y CAE2; y la Fundación AgroUC, en Pirque, donde se desarrolla el ensayo con lisímetros de pesada.\n\n\n\n\nHuechuraba\n\nCarr. Gral. San Martín 7021, Región Metropolitana.\nCoordenadas aproximadas: -33.354, -70.691\nAltitud: 490,87 m s. n. m.\nUso experimental: parcelas de balance energético y torre Eddy Covariance.\n\n\n\n\nPirque\n\nValle del Maipo, Región Metropolitana.\nCoordenadas aproximadas: 33°40’25” S; 70°35’09” O\nAltitud: 661 m s. n. m.\nUso experimental: lisímetros de pesada para pasto alfombra y cubresuelo nativo."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/zona-estudio.html#mapa-de-referencia",
-    "href": "pumahuida_quarto_website/zona-estudio.html#mapa-de-referencia",
-    "title": "Zona de estudio",
-    "section": "Mapa de referencia",
-    "text": "Mapa de referencia\n\n\n\nEl marcador corresponde al Vivero y Jardín Pumahuida. La Fundación AgroUC se ubica hacia Pirque, al suroriente del área mostrada."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/zona-estudio.html#contexto-climático",
-    "href": "pumahuida_quarto_website/zona-estudio.html#contexto-climático",
-    "title": "Zona de estudio",
-    "section": "Contexto climático",
-    "text": "Contexto climático\nAmbos sitios se ubican en un clima mediterráneo de Chile central, caracterizado por una estación seca prolongada durante primavera-verano e inviernos fríos y húmedos. Huechuraba representa un contexto urbano y periurbano de alta presión sobre el agua, mientras que Pirque, por su mayor altitud y posición en el valle del Maipo, presenta rasgos más continentales, con mayor oscilación térmica diaria y heladas más marcadas.\n\n\nRasgos comunes\n\nEstación seca prolongada.\nAlta radiación durante verano.\nDemanda evaporativa elevada.\nAlta oscilación térmica diaria.\n\n\n\nRelevancia experimental\nEstas condiciones permiten evaluar el desempeño hídrico de especies ornamentales en un escenario representativo de la zona central de Chile: poca agua disponible, alta demanda atmosférica y necesidad urgente de paisajismo eficiente."
-  },
-  {
-    "objectID": "pumahuida_quarto_website/zona-estudio.html#sitios-dentro-del-diseño-experimental",
-    "href": "pumahuida_quarto_website/zona-estudio.html#sitios-dentro-del-diseño-experimental",
-    "title": "Zona de estudio",
-    "section": "Sitios dentro del diseño experimental",
-    "text": "Sitios dentro del diseño experimental\n\n\nPumahuida\nConcentra las mediciones de balance energético mediante sensores de radiación, temperatura superficial, flujo de calor del suelo, humedad volumétrica, estación meteorológica y Eddy Covariance.\n\n\nAgroUC\nPermite medir consumo hídrico mediante variaciones de masa en lisímetros de pesada, transformando cambios de masa a lámina de agua para pasto alfombra y cubresuelo nativo."
   },
   {
     "objectID": "teledeteccion.html",

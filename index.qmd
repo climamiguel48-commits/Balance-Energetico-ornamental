@@ -1,6 +1,7 @@
 ---
-title: "Demanda hídrica de vegetación ornamental nativa"
-subtitle: "Enfoque para cuantificar la demanda de agua de la vegetación ornamental nativa de mayor potencial de uso para áreas verdes de las zonas semiáridas mediterráneas de chile"
+title: "Demanda hídrica de vegetación ornamental nativa y exótica"
+subtitle: "Enfoque para cuentificar la demanda de agua de vegetación ornamental nativa
+de mayor potencial de uso para areas verdes de las zonas semiáridas mediterráneas de Chile"
 ---
 
 ```{r}
@@ -16,7 +17,7 @@ n_registros <- nrow(datos)
 ```
 
 ::: {.hero}
-# Agua, paisaje y datos vivos
+# Proyecto Fondecyt Regular 1241610
 
 Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas **CAE1**, **CAE2** y especies **exóticas** en áreas verdes de clima mediterráneo semiárido de Chile.
 
