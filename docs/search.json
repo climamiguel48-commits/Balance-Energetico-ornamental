@@ -1,80 +1,38 @@
 [
   {
-    "objectID": "lisimetria.html",
-    "href": "lisimetria.html",
-    "title": "Lisimetría",
+    "objectID": "zona-estudio.html",
+    "href": "zona-estudio.html",
+    "title": "Zona de estudio",
     "section": "",
-    "text": "Los ensayos de lisimetría se desarrollan en la Fundación AgroUC (Pirque, Región Metropolitana, Chile).\nLos lisímetros de pesada permiten determinar el consumo real de agua mediante el seguimiento continuo de cambios de masa, transformando posteriormente dichos cambios en lámina de agua evapotranspirada.\n\n\n\nEste lisímetro contiene un cubresuelo nativo utilizado como alternativa ornamental de bajo requerimiento hídrico.\nLas mediciones permiten estimar:\n\nEvapotranspiración real.\nCoeficiente de cultivo.\nEficiencia hídrica.\nRespuesta estacional.\n\n\n\n\n\n\nEste lisímetro contiene pasto alfombra, utilizado como referencia por ser una de las coberturas más empleadas en áreas verdes urbanas.\nLa comparación con especies nativas permite cuantificar potenciales ahorros de agua en el diseño de paisajes urbanos mediterráneos.\n\n\n\n\n\n\n\n\nTemperatura del aire\nHumedad relativa\nRadiación solar\nVelocidad del viento\nPrecipitación\n\n\n\n\n\nMasa del lisímetro\nCambio de almacenamiento\nEvapotranspiración diaria\nEvapotranspiración acumulada\nCoeficiente de cultivo"
+    "text": "El proyecto se desarrolla en dos sitios de la Región Metropolitana de Santiago de Chile: el Vivero y Jardín Pumahuida, en Huechuraba, donde se ubican las parcelas experimentales de especies exóticas, CAE1 y CAE2; y la Fundación AgroUC, en Pirque, donde se desarrolla el ensayo con lisímetros de pesada.\n\n\n\n\nHuechuraba\n\nCarr. Gral. San Martín 7021, Región Metropolitana.\nCoordenadas aproximadas: -33.354, -70.691\nAltitud: 490,87 m s. n. m.\nUso experimental: parcelas de balance energético y torre Eddy Covariance.\n\n\n\n\nPirque\n\nValle del Maipo, Región Metropolitana.\nCoordenadas aproximadas: 33°40’25” S; 70°35’09” O\nAltitud: 661 m s. n. m.\nUso experimental: lisímetros de pesada para pasto alfombra y cubresuelo nativo."
   },
   {
-    "objectID": "lisimetria.html#cubresuelo-nativo-tiqui-tiqui",
-    "href": "lisimetria.html#cubresuelo-nativo-tiqui-tiqui",
-    "title": "Lisimetría",
+    "objectID": "zona-estudio.html#localización-general",
+    "href": "zona-estudio.html#localización-general",
+    "title": "Zona de estudio",
     "section": "",
-    "text": "Este lisímetro contiene un cubresuelo nativo utilizado como alternativa ornamental de bajo requerimiento hídrico.\nLas mediciones permiten estimar:\n\nEvapotranspiración real.\nCoeficiente de cultivo.\nEficiencia hídrica.\nRespuesta estacional."
+    "text": "El proyecto se desarrolla en dos sitios de la Región Metropolitana de Santiago de Chile: el Vivero y Jardín Pumahuida, en Huechuraba, donde se ubican las parcelas experimentales de especies exóticas, CAE1 y CAE2; y la Fundación AgroUC, en Pirque, donde se desarrolla el ensayo con lisímetros de pesada.\n\n\n\n\nHuechuraba\n\nCarr. Gral. San Martín 7021, Región Metropolitana.\nCoordenadas aproximadas: -33.354, -70.691\nAltitud: 490,87 m s. n. m.\nUso experimental: parcelas de balance energético y torre Eddy Covariance.\n\n\n\n\nPirque\n\nValle del Maipo, Región Metropolitana.\nCoordenadas aproximadas: 33°40’25” S; 70°35’09” O\nAltitud: 661 m s. n. m.\nUso experimental: lisímetros de pesada para pasto alfombra y cubresuelo nativo."
   },
   {
-    "objectID": "lisimetria.html#pasto-alfombra",
-    "href": "lisimetria.html#pasto-alfombra",
-    "title": "Lisimetría",
-    "section": "",
-    "text": "Este lisímetro contiene pasto alfombra, utilizado como referencia por ser una de las coberturas más empleadas en áreas verdes urbanas.\nLa comparación con especies nativas permite cuantificar potenciales ahorros de agua en el diseño de paisajes urbanos mediterráneos."
+    "objectID": "zona-estudio.html#mapa-de-referencia",
+    "href": "zona-estudio.html#mapa-de-referencia",
+    "title": "Zona de estudio",
+    "section": "Mapa de referencia",
+    "text": "Mapa de referencia\n\n\n\n\n\n\n\nEl mapa muestra los dos sitios experimentales del proyecto: el Vivero y Jardín Pumahuida en Huechuraba y la Fundación AgroUC en Pirque."
   },
   {
-    "objectID": "lisimetria.html#variables-monitoreadas",
-    "href": "lisimetria.html#variables-monitoreadas",
-    "title": "Lisimetría",
-    "section": "",
-    "text": "Temperatura del aire\nHumedad relativa\nRadiación solar\nVelocidad del viento\nPrecipitación\n\n\n\n\n\nMasa del lisímetro\nCambio de almacenamiento\nEvapotranspiración diaria\nEvapotranspiración acumulada\nCoeficiente de cultivo"
+    "objectID": "zona-estudio.html#contexto-climático",
+    "href": "zona-estudio.html#contexto-climático",
+    "title": "Zona de estudio",
+    "section": "Contexto climático",
+    "text": "Contexto climático\nAmbos sitios se ubican en un clima mediterráneo de Chile central, caracterizado por una estación seca prolongada durante primavera-verano e inviernos fríos y húmedos. Huechuraba representa un contexto urbano y periurbano de alta presión sobre el agua, mientras que Pirque, por su mayor altitud y posición en el valle del Maipo, presenta rasgos más continentales, con mayor oscilación térmica diaria y heladas más marcadas.\n\n\nRasgos comunes\n\nEstación seca prolongada.\nAlta radiación durante verano.\nDemanda evaporativa elevada.\nAlta oscilación térmica diaria.\n\n\n\nRelevancia experimental\nEstas condiciones permiten evaluar el desempeño hídrico de especies ornamentales en un escenario representativo de la zona central de Chile: poca agua disponible, alta demanda atmosférica y necesidad urgente de paisajismo eficiente."
   },
   {
-    "objectID": "teledeteccion.html",
-    "href": "teledeteccion.html",
-    "title": "Teledetección",
-    "section": "",
-    "text": "Esta sección queda preparada para incorporar los datos de teledetección cuando estén disponibles. Por ahora se han realizado algunas capturas, pero los productos procesados todavía no están incorporados al sitio."
-  },
-  {
-    "objectID": "teledeteccion.html#datos-esperados",
-    "href": "teledeteccion.html#datos-esperados",
-    "title": "Teledetección",
-    "section": "Datos esperados",
-    "text": "Datos esperados\n\n\nNDVI / EVI\nÍndices de vegetación para monitorear vigor, cobertura y cambios fenológicos entre parcelas.\n\n\nTemperatura superficial\nInformación térmica para alimentar modelos de balance energético y detectar estrés hídrico.\n\n\nLiDAR\nAltura, volumen y estructura tridimensional del dosel para estimar biomasa y normalizar resultados.\n\n\nModelos ET\nImplementación futura de RS-PM y TSEB-PT calibrados con datos locales."
-  },
-  {
-    "objectID": "teledeteccion.html#flujo-de-trabajo-previsto",
-    "href": "teledeteccion.html#flujo-de-trabajo-previsto",
-    "title": "Teledetección",
-    "section": "Flujo de trabajo previsto",
-    "text": "Flujo de trabajo previsto\n\nProcesamiento radiométrico y geométrico de imágenes.\nGeneración de ortomosaicos multiespectrales y térmicos.\nCálculo de índices NDVI, EVI y temperatura superficial.\nExtracción de estadísticas por parcela.\nIntegración con datos meteorológicos y balance energético.\nEvaluación de modelos RS-PM y TSEB-PT contra mediciones de referencia."
-  },
-  {
-    "objectID": "teledeteccion.html#visualizaciones-futuras",
-    "href": "teledeteccion.html#visualizaciones-futuras",
-    "title": "Teledetección",
-    "section": "Visualizaciones futuras",
-    "text": "Visualizaciones futuras\nCuando estén disponibles los productos, esta página incluirá:\n\nMapas interactivos por fecha de vuelo.\nComparación temporal de NDVI y EVI.\nMapas térmicos de temperatura de copa y suelo.\nEstimación espacial de ET por parcela.\nComparación entre ET medida y ET modelada."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
-    "section": "",
-    "text": "Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y especies exóticas en áreas verdes de clima mediterráneo semiárido de Chile."
-  },
-  {
-    "objectID": "index.html#resumen-del-proyecto",
-    "href": "index.html#resumen-del-proyecto",
-    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
-    "section": "Resumen del proyecto",
-    "text": "Resumen del proyecto\nLa investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución."
-  },
-  {
-    "objectID": "index.html#navegación-rápida",
-    "href": "index.html#navegación-rápida",
-    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
-    "section": "Navegación rápida",
-    "text": "Navegación rápida\n\n\n🌿 Proyecto\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n\n\n📍 Zona de estudio\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n\n\n🧪 Metodología\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n\n\n📈 Resultados\nGráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.\n\n\n🛰 Teledetección\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.\n\n\n📂 Datos abiertos\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito. Ir a datos"
+    "objectID": "zona-estudio.html#sitios-dentro-del-diseño-experimental",
+    "href": "zona-estudio.html#sitios-dentro-del-diseño-experimental",
+    "title": "Zona de estudio",
+    "section": "Sitios dentro del diseño experimental",
+    "text": "Sitios dentro del diseño experimental\n\n\nPumahuida\nConcentra las mediciones de balance energético mediante sensores de radiación, temperatura superficial, flujo de calor del suelo, humedad volumétrica, estación meteorológica y Eddy Covariance.\n\n\nAgroUC\nPermite medir consumo hídrico mediante variaciones de masa en lisímetros de pesada, transformando cambios de masa a lámina de agua para pasto alfombra y cubresuelo nativo."
   },
   {
     "objectID": "resultados.html",
@@ -201,5 +159,222 @@
     "title": "Resultados preliminares",
     "section": "Componentes principales del balance energético",
     "text": "Componentes principales del balance energético\n\n\n\n\n\n\n\n\nFigure 14"
+  },
+  {
+    "objectID": "parcelas.html",
+    "href": "parcelas.html",
+    "title": "Parcelas experimentales",
+    "section": "",
+    "text": "El ensayo principal se desarrolla en tres parcelas que representan estrategias contrastantes de paisajismo: una parcela con especies exóticas tradicionales y dos parcelas con especies nativas agrupadas en categorías agroecológicas CAE1 y CAE2.\n\n\n\n\n250 m²\n\nEspecies ornamentales de uso frecuente en áreas verdes chilenas.\n\n\n\n\n250 m²\n\nEspecies nativas adaptadas a baja disponibilidad hídrica.\n\n\n\n\n1000 m²\n\nEspecies nativas con mayor superficie experimental e instalación de torre Eddy Covariance."
+  },
+  {
+    "objectID": "parcelas.html#diseño-del-ensayo",
+    "href": "parcelas.html#diseño-del-ensayo",
+    "title": "Parcelas experimentales",
+    "section": "",
+    "text": "El ensayo principal se desarrolla en tres parcelas que representan estrategias contrastantes de paisajismo: una parcela con especies exóticas tradicionales y dos parcelas con especies nativas agrupadas en categorías agroecológicas CAE1 y CAE2.\n\n\n\n\n250 m²\n\nEspecies ornamentales de uso frecuente en áreas verdes chilenas.\n\n\n\n\n250 m²\n\nEspecies nativas adaptadas a baja disponibilidad hídrica.\n\n\n\n\n1000 m²\n\nEspecies nativas con mayor superficie experimental e instalación de torre Eddy Covariance."
+  },
+  {
+    "objectID": "parcelas.html#grupos-vegetales",
+    "href": "parcelas.html#grupos-vegetales",
+    "title": "Parcelas experimentales",
+    "section": "Grupos vegetales",
+    "text": "Grupos vegetales"
+  },
+  {
+    "objectID": "parcelas.html#resumen-por-grupo",
+    "href": "parcelas.html#resumen-por-grupo",
+    "title": "Parcelas experimentales",
+    "section": "Resumen por grupo",
+    "text": "Resumen por grupo"
+  },
+  {
+    "objectID": "parcelas.html#parcela-cae1",
+    "href": "parcelas.html#parcela-cae1",
+    "title": "Parcelas experimentales",
+    "section": "Parcela CAE1",
+    "text": "Parcela CAE1\n\nLa parcela CAE1 está compuesta por especies nativas y adaptadas al clima mediterráneo de Chile central. En esta parcela se monitorean variables de balance energético, temperatura superficial, humedad del suelo y evapotranspiración."
+  },
+  {
+    "objectID": "parcelas.html#parcela-cae2",
+    "href": "parcelas.html#parcela-cae2",
+    "title": "Parcelas experimentales",
+    "section": "Parcela CAE2",
+    "text": "Parcela CAE2\n\nLa parcela CAE2 incorpora una composición vegetal diferente, permitiendo comparar respuestas ecofisiológicas y energéticas frente a las mismas condiciones atmosféricas."
+  },
+  {
+    "objectID": "parcelas.html#parcela-de-especies-exóticas",
+    "href": "parcelas.html#parcela-de-especies-exóticas",
+    "title": "Parcelas experimentales",
+    "section": "Parcela de especies exóticas",
+    "text": "Parcela de especies exóticas\n\nLa parcela de especies exóticas representa un modelo ornamental ampliamente utilizado en paisajismo urbano. Su comparación con especies nativas permite evaluar oportunidades de reducción del consumo hídrico en áreas verdes."
+  },
+  {
+    "objectID": "lisimetria.html",
+    "href": "lisimetria.html",
+    "title": "Lisimetría",
+    "section": "",
+    "text": "Los ensayos de lisimetría se desarrollan en la Fundación AgroUC (Pirque, Región Metropolitana, Chile).\nLos lisímetros de pesada permiten determinar el consumo real de agua mediante el seguimiento continuo de cambios de masa, transformando posteriormente dichos cambios en lámina de agua evapotranspirada.\n\n\n\nEste lisímetro contiene un cubresuelo nativo utilizado como alternativa ornamental de bajo requerimiento hídrico.\nLas mediciones permiten estimar:\n\nEvapotranspiración real.\nCoeficiente de cultivo.\nEficiencia hídrica.\nRespuesta estacional.\n\n\n\n\n\n\nEste lisímetro contiene pasto alfombra, utilizado como referencia por ser una de las coberturas más empleadas en áreas verdes urbanas.\nLa comparación con especies nativas permite cuantificar potenciales ahorros de agua en el diseño de paisajes urbanos mediterráneos.\n\n\n\n\n\n\n\n\nTemperatura del aire\nHumedad relativa\nRadiación solar\nVelocidad del viento\nPrecipitación\n\n\n\n\n\nMasa del lisímetro\nCambio de almacenamiento\nEvapotranspiración diaria\nEvapotranspiración acumulada\nCoeficiente de cultivo"
+  },
+  {
+    "objectID": "lisimetria.html#cubresuelo-nativo-tiqui-tiqui",
+    "href": "lisimetria.html#cubresuelo-nativo-tiqui-tiqui",
+    "title": "Lisimetría",
+    "section": "",
+    "text": "Este lisímetro contiene un cubresuelo nativo utilizado como alternativa ornamental de bajo requerimiento hídrico.\nLas mediciones permiten estimar:\n\nEvapotranspiración real.\nCoeficiente de cultivo.\nEficiencia hídrica.\nRespuesta estacional."
+  },
+  {
+    "objectID": "lisimetria.html#pasto-alfombra",
+    "href": "lisimetria.html#pasto-alfombra",
+    "title": "Lisimetría",
+    "section": "",
+    "text": "Este lisímetro contiene pasto alfombra, utilizado como referencia por ser una de las coberturas más empleadas en áreas verdes urbanas.\nLa comparación con especies nativas permite cuantificar potenciales ahorros de agua en el diseño de paisajes urbanos mediterráneos."
+  },
+  {
+    "objectID": "lisimetria.html#variables-monitoreadas",
+    "href": "lisimetria.html#variables-monitoreadas",
+    "title": "Lisimetría",
+    "section": "",
+    "text": "Temperatura del aire\nHumedad relativa\nRadiación solar\nVelocidad del viento\nPrecipitación\n\n\n\n\n\nMasa del lisímetro\nCambio de almacenamiento\nEvapotranspiración diaria\nEvapotranspiración acumulada\nCoeficiente de cultivo"
+  },
+  {
+    "objectID": "datos.html",
+    "href": "datos.html",
+    "title": "Descarga de datos",
+    "section": "",
+    "text": "Los archivos se pueden descargar directamente desde esta sección.\n\n\n\n\n\n\nTip\n\n\n\nLos botones siguientes son enlaces directos a archivos incluidos en el sitio. En GitHub Pages deberían abrir la descarga o cargar el archivo en una pestaña nueva, según el navegador.\n\n\n\n\nParcela CAE1\nDatos horarios corregidos de balance energético.\n⬇ Descargar Excel\n\n\nParcela CAE2\nDatos horarios corregidos de balance energético.\n⬇ Descargar Excel\n\n\nParcela Exótica\nDatos horarios corregidos de balance energético.\n⬇ Descargar Excel\n\n\nEstación meteorológica / CAE2\nVariables meteorológicas y datos asociados a la parcela CAE2.\n⬇ Descargar Excel\n\n\nEddy Covariance — anemómetro\nDatos horarios del anemómetro sónico.\n⬇ Descargar Excel\n\n\nEddy Covariance — IRGA\nDatos horarios del analizador de gases.\n⬇ Descargar Excel"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
+    "section": "",
+    "text": "Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y especies exóticas en áreas verdes de clima mediterráneo semiárido de Chile."
+  },
+  {
+    "objectID": "index.html#resumen-del-proyecto",
+    "href": "index.html#resumen-del-proyecto",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
+    "section": "Resumen del proyecto",
+    "text": "Resumen del proyecto\nLa investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución."
+  },
+  {
+    "objectID": "index.html#navegación-rápida",
+    "href": "index.html#navegación-rápida",
+    "title": "Demanda hídrica de vegetación ornamental nativa y exótica",
+    "section": "Navegación rápida",
+    "text": "Navegación rápida\n\n\n\n🌿 Proyecto\n\n\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n\n\n\n\n📍 Zona de estudio\n\n\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n\n\n\n\n🧪 Metodología\n\n\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n\n\n\n\n🌱 Parcelas\n\n\nGalería y descripción de las parcelas CAE1, CAE2 y exóticas.\n\n\n\n\n⚖️ Lisimetría\n\n\nEnsayos con lisímetros de pesada para pasto alfombra y cubresuelo nativo.\n\n\n\n\n🛰 Teledetección\n\n\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT.\n\n\n\n\n📈 Resultados\n\n\nGráficas de variables meteorológicas, superficie, suelo y balance energético.\n\n\n\n\n📂 Datos abiertos\n\n\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito."
+  },
+  {
+    "objectID": "metodologia.html",
+    "href": "metodologia.html",
+    "title": "Metodología",
+    "section": "",
+    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
+  },
+  {
+    "objectID": "metodologia.html#enfoque-general",
+    "href": "metodologia.html#enfoque-general",
+    "title": "Metodología",
+    "section": "",
+    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
+  },
+  {
+    "objectID": "metodologia.html#balance-energético",
+    "href": "metodologia.html#balance-energético",
+    "title": "Metodología",
+    "section": "Balance energético",
+    "text": "Balance energético\nLa evapotranspiración se estima a partir del balance de energía:\n\\[ R_n = LE + H + G \\]\nPor despeje:\n\\[ LE = R_n - H - G \\]\nLuego, el flujo de calor latente se transforma a lámina de agua evaporada o transpirada mediante el calor latente de vaporización.\n\n\nRn\nRadiación neta medida con radiómetros instalados sobre las parcelas.\n\n\nG\nFlujo de calor del suelo medido con platos de flujo y corregido por almacenamiento térmico.\n\n\nH\nFlujo de calor sensible estimado a partir de temperatura superficial, temperatura del aire y resistencia aerodinámica.\n\n\nLE / ET\nFlujo de calor latente estimado como residual del balance energético y convertido a evapotranspiración."
+  },
+  {
+    "objectID": "metodologia.html#instrumentación-principal",
+    "href": "metodologia.html#instrumentación-principal",
+    "title": "Metodología",
+    "section": "Instrumentación principal",
+    "text": "Instrumentación principal"
+  },
+  {
+    "objectID": "metodologia.html#calibración-con-eddy-covariance",
+    "href": "metodologia.html#calibración-con-eddy-covariance",
+    "title": "Metodología",
+    "section": "Calibración con Eddy Covariance",
+    "text": "Calibración con Eddy Covariance\nEl sistema de balance energético será calibrado mediante comparación con flujos medidos por Eddy Covariance. La evaluación considera control de calidad de datos, cierre energético y métricas estadísticas como MBE, MAE, RMSE, R² y NSE."
+  },
+  {
+    "objectID": "metodologia.html#programación-de-riego",
+    "href": "metodologia.html#programación-de-riego",
+    "title": "Metodología",
+    "section": "Programación de riego",
+    "text": "Programación de riego\nEl riego se maneja por goteo y agotamiento del agua fácilmente aprovechable. La programación considera capacidad de campo, punto de marchitez permanente, densidad aparente, profundidad radicular, pedregosidad, porcentaje de suelo mojado y umbral de riego."
+  },
+  {
+    "objectID": "proyecto.html",
+    "href": "proyecto.html",
+    "title": "Proyecto doctoral",
+    "section": "",
+    "text": "La escasez de agua dulce en Chile central y la presión del riego urbano hacen necesario conocer, con datos cuantitativos, cuánto consumen realmente las especies ornamentales utilizadas en áreas verdes. El proyecto compara comunidades vegetales nativas CAE1 y CAE2 con especies exóticas tradicionales, usando mediciones de campo y modelos físicos de evapotranspiración.\n\n\n\nEl paisajismo urbano sigue dependiendo de especies y criterios de riego que no siempre responden al contexto de sequía prolongada.\n\n\n\nFaltan datos locales y comparables sobre requerimientos hídricos reales de comunidades ornamentales nativas y exóticas.\n\n\n\nGenerar coeficientes de paisajismo y herramientas de monitoreo para diseñar áreas verdes más eficientes y resilientes."
+  },
+  {
+    "objectID": "proyecto.html#planteamiento-general",
+    "href": "proyecto.html#planteamiento-general",
+    "title": "Proyecto doctoral",
+    "section": "",
+    "text": "La escasez de agua dulce en Chile central y la presión del riego urbano hacen necesario conocer, con datos cuantitativos, cuánto consumen realmente las especies ornamentales utilizadas en áreas verdes. El proyecto compara comunidades vegetales nativas CAE1 y CAE2 con especies exóticas tradicionales, usando mediciones de campo y modelos físicos de evapotranspiración.\n\n\n\nEl paisajismo urbano sigue dependiendo de especies y criterios de riego que no siempre responden al contexto de sequía prolongada.\n\n\n\nFaltan datos locales y comparables sobre requerimientos hídricos reales de comunidades ornamentales nativas y exóticas.\n\n\n\nGenerar coeficientes de paisajismo y herramientas de monitoreo para diseñar áreas verdes más eficientes y resilientes."
+  },
+  {
+    "objectID": "proyecto.html#hipótesis",
+    "href": "proyecto.html#hipótesis",
+    "title": "Proyecto doctoral",
+    "section": "Hipótesis",
+    "text": "Hipótesis\nLa integración de balance energético, balance hídrico y teledetección calibrada localmente permitirá estimar con precisión los requerimientos hídricos y coeficientes de paisajismo de comunidades ornamentales. Se espera que los grupos nativos CAE1 y CAE2 presenten menores requerimientos hídricos y mayor eficiencia en el uso del agua que las especies exóticas."
+  },
+  {
+    "objectID": "proyecto.html#objetivo-general",
+    "href": "proyecto.html#objetivo-general",
+    "title": "Proyecto doctoral",
+    "section": "Objetivo general",
+    "text": "Objetivo general\nDesarrollar un marco metodológico integrado que combine enfoques de balance energético, balance hídrico y teledetección para cuantificar los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y exóticas bajo condiciones urbanas heterogéneas."
+  },
+  {
+    "objectID": "proyecto.html#objetivos-específicos",
+    "href": "proyecto.html#objetivos-específicos",
+    "title": "Proyecto doctoral",
+    "section": "Objetivos específicos",
+    "text": "Objetivos específicos\n\nCuantificar el consumo hídrico de especies nativas y exóticas mediante modelos de balance energético.\nValidar modelos derivados de sensores remotos para estimar demandas hídricas en condiciones reales de paisajismo urbano.\nDeterminar coeficientes de paisajismo para especies exóticas, CAE1 y CAE2 bajo clima semiárido chileno.\nEstablecer demandas hídricas de pasto alfombra y cubresuelo nativo mediante lisimetría de pesada."
+  },
+  {
+    "objectID": "proyecto.html#línea-de-tiempo",
+    "href": "proyecto.html#línea-de-tiempo",
+    "title": "Proyecto doctoral",
+    "section": "Línea de tiempo",
+    "text": "Línea de tiempo\n\n\nAgosto 2025: instalación operativa de sensores y comienzo del registro continuo.\n\n\n2025–2026: monitoreo horario de parcelas, estación meteorológica y Eddy Covariance.\n\n\n2026: integración preliminar de resultados y visualización pública de datos.\n\n\nPróxima fase: incorporación de vuelos de dron, índices espectrales, temperatura superficial y LiDAR."
+  },
+  {
+    "objectID": "teledeteccion.html",
+    "href": "teledeteccion.html",
+    "title": "Teledetección",
+    "section": "",
+    "text": "Esta sección queda preparada para incorporar los datos de teledetección cuando estén disponibles. Por ahora se han realizado algunas capturas, pero los productos procesados todavía no están incorporados al sitio."
+  },
+  {
+    "objectID": "teledeteccion.html#datos-esperados",
+    "href": "teledeteccion.html#datos-esperados",
+    "title": "Teledetección",
+    "section": "Datos esperados",
+    "text": "Datos esperados\n\n\nNDVI / EVI\nÍndices de vegetación para monitorear vigor, cobertura y cambios fenológicos entre parcelas.\n\n\nTemperatura superficial\nInformación térmica para alimentar modelos de balance energético y detectar estrés hídrico.\n\n\nLiDAR\nAltura, volumen y estructura tridimensional del dosel para estimar biomasa y normalizar resultados.\n\n\nModelos ET\nImplementación futura de RS-PM y TSEB-PT calibrados con datos locales."
+  },
+  {
+    "objectID": "teledeteccion.html#flujo-de-trabajo-previsto",
+    "href": "teledeteccion.html#flujo-de-trabajo-previsto",
+    "title": "Teledetección",
+    "section": "Flujo de trabajo previsto",
+    "text": "Flujo de trabajo previsto\n\nProcesamiento radiométrico y geométrico de imágenes.\nGeneración de ortomosaicos multiespectrales y térmicos.\nCálculo de índices NDVI, EVI y temperatura superficial.\nExtracción de estadísticas por parcela.\nIntegración con datos meteorológicos y balance energético.\nEvaluación de modelos RS-PM y TSEB-PT contra mediciones de referencia."
+  },
+  {
+    "objectID": "teledeteccion.html#visualizaciones-futuras",
+    "href": "teledeteccion.html#visualizaciones-futuras",
+    "title": "Teledetección",
+    "section": "Visualizaciones futuras",
+    "text": "Visualizaciones futuras\nCuando estén disponibles los productos, esta página incluirá:\n\nMapas interactivos por fecha de vuelo.\nComparación temporal de NDVI y EVI.\nMapas térmicos de temperatura de copa y suelo.\nEstimación espacial de ET por parcela.\nComparación entre ET medida y ET modelada."
   }
 ]

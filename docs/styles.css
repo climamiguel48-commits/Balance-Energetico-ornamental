@@ -93,3 +93,26 @@ strong,
 b {
   font-weight: 650;
 }
+.quick-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  text-decoration: none;
+}
+
+.quick-card h3 {
+  margin-top: 0;
+}
+
+.quick-card p {
+  margin-bottom: 0;
+}
+
+
+
