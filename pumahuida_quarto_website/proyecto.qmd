@@ -1,0 +1,48 @@
+---
+title: "Proyecto doctoral"
+---
+
+## Planteamiento general
+
+La escasez de agua dulce en Chile central y la presión del riego urbano hacen necesario conocer, con datos cuantitativos, cuánto consumen realmente las especies ornamentales utilizadas en áreas verdes. El proyecto compara comunidades vegetales nativas **CAE1** y **CAE2** con especies exóticas tradicionales, usando mediciones de campo y modelos físicos de evapotranspiración.
+
+::: {.card-grid}
+::: {.puma-card}
+### Problema
+El paisajismo urbano sigue dependiendo de especies y criterios de riego que no siempre responden al contexto de sequía prolongada.
+:::
+
+::: {.puma-card}
+### Brecha
+Faltan datos locales y comparables sobre requerimientos hídricos reales de comunidades ornamentales nativas y exóticas.
+:::
+
+::: {.puma-card}
+### Aporte
+Generar coeficientes de paisajismo y herramientas de monitoreo para diseñar áreas verdes más eficientes y resilientes.
+:::
+:::
+
+## Hipótesis
+
+La integración de balance energético, balance hídrico y teledetección calibrada localmente permitirá estimar con precisión los requerimientos hídricos y coeficientes de paisajismo de comunidades ornamentales. Se espera que los grupos nativos CAE1 y CAE2 presenten menores requerimientos hídricos y mayor eficiencia en el uso del agua que las especies exóticas.
+
+## Objetivo general
+
+Desarrollar un marco metodológico integrado que combine enfoques de balance energético, balance hídrico y teledetección para cuantificar los requerimientos hídricos de especies ornamentales nativas CAE1, CAE2 y exóticas bajo condiciones urbanas heterogéneas.
+
+## Objetivos específicos
+
+1. Cuantificar el consumo hídrico de especies nativas y exóticas mediante modelos de balance energético.
+2. Validar modelos derivados de sensores remotos para estimar demandas hídricas en condiciones reales de paisajismo urbano.
+3. Determinar coeficientes de paisajismo para especies exóticas, CAE1 y CAE2 bajo clima semiárido chileno.
+4. Establecer demandas hídricas de pasto alfombra y cubresuelo nativo mediante lisimetría de pesada.
+
+## Línea de tiempo
+
+::: {.timeline}
+<div><strong>Agosto 2025:</strong> instalación operativa de sensores y comienzo del registro continuo.</div>
+<div><strong>2025–2026:</strong> monitoreo horario de parcelas, estación meteorológica y Eddy Covariance.</div>
+<div><strong>2026:</strong> integración preliminar de resultados y visualización pública de datos.</div>
+<div><strong>Próxima fase:</strong> incorporación de vuelos de dron, índices espectrales, temperatura superficial y LiDAR.</div>
+:::

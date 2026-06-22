@@ -1,0 +1,263 @@
+---
+title: "Resultados preliminares"
+---
+
+```{r}
+#| label: setup-resultados
+#| include: false
+
+library(dplyr)
+library(ggplot2)
+library(DT)
+library(tidyr)
+library(lubridate)
+
+source("scripts/helpers.R")
+
+# Versión estable: gráficos ggplot estáticos para evitar errores de Plotly con fechas.
+
+datos <- read_parcelas()
+diario <- summarise_daily(datos)
+
+# Corrección defensiva de tipos ------------------------------------------------
+# Esto evita errores de Plotly cuando la fecha viene como texto, POSIXlt,
+# número de Excel o cualquier mezcla rara entre archivos.
+normalizar_fecha <- function(x) {
+  if (inherits(x, "Date")) return(x)
+  if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) return(as.Date(x))
+  if (is.numeric(x)) return(as.Date(x, origin = "1899-12-30"))
+  as.Date(parse_date_time(as.character(x),
+                          orders = c("ymd", "ymd HMS", "ymd HM", "dmy", "dmy HMS", "dmy HM"),
+                          quiet = TRUE))
+}
+
+diario <- diario |>
+  ungroup() |>
+  mutate(
+    fecha = normalizar_fecha(fecha),
+    grupo = as.character(grupo)
+  ) |>
+  arrange(grupo, fecha)
+
+datos <- datos |>
+  ungroup() |>
+  mutate(
+    fecha = normalizar_fecha(fecha),
+    grupo = as.character(grupo)
+  )
+
+# Función auxiliar: si no hay datos suficientes, muestra un mensaje bonito
+hay_datos <- function(df) {
+  is.data.frame(df) && nrow(df) > 0
+}
+```
+
+## Lectura general de los datos
+
+::: {.card-grid}
+::: {.puma-card}
+**Registros horarios**
+
+<div class="metric">`r format(nrow(datos), big.mark = '.', decimal.mark = ',')`</div>
+:::
+
+::: {.puma-card}
+**Fecha inicial**
+
+<div class="metric-small">`r min(datos$fecha, na.rm = TRUE)`</div>
+:::
+
+::: {.puma-card}
+**Fecha final**
+
+<div class="metric-small">`r max(datos$fecha, na.rm = TRUE)`</div>
+:::
+
+::: {.puma-card}
+**Parcelas**
+
+<div class="metric">`r length(unique(datos$grupo))`</div>
+:::
+:::
+
+## Flujo de calor latente preliminar
+
+```{r}
+#| label: fig-le
+#| fig-height: 6
+
+df_le <- diario |>
+  filter(!is.na(fecha), !is.na(LE_medio)) |>
+  mutate(
+    tooltip = paste0(
+      "Parcela: ", grupo,
+      "<br>Fecha: ", fecha,
+      "<br>LE: ", round(LE_medio, 2), " W m⁻²"
+    )
+  )
+
+if (hay_datos(df_le)) {
+  p_le <- ggplot(df_le, aes(x = fecha, y = LE_medio, color = grupo, group = grupo)) +
+    geom_line(linewidth = 0.75, alpha = 0.9) +
+    labs(x = NULL, y = "LE medio diario (W m⁻²)", color = "Parcela") +
+    theme_minimal(base_size = 13)
+
+  p_le
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de LE para graficar.</div>")
+}
+```
+
+## Radiación neta
+
+```{r}
+#| label: fig-rn
+#| fig-height: 6
+
+df_rn <- diario |>
+  filter(!is.na(fecha), !is.na(Rn_medio)) |>
+  mutate(
+    tooltip = paste0(
+      "Parcela: ", grupo,
+      "<br>Fecha: ", fecha,
+      "<br>Rn: ", round(Rn_medio, 2), " W m⁻²"
+    )
+  )
+
+if (hay_datos(df_rn)) {
+  p_rn <- ggplot(df_rn, aes(x = fecha, y = Rn_medio, color = grupo, group = grupo)) +
+    geom_line(linewidth = 0.75, alpha = 0.9) +
+    labs(x = NULL, y = "Rn medio diario (W m⁻²)", color = "Parcela") +
+    theme_minimal(base_size = 13)
+
+  p_rn
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de radiación neta para graficar.</div>")
+}
+```
+
+## Componentes del balance energético
+
+```{r}
+#| label: fig-componentes
+#| fig-height: 6
+
+componentes <- diario |>
+  select(grupo, fecha, LE_medio, H_medio, Rn_medio, G_medio) |>
+  pivot_longer(c(LE_medio, H_medio, Rn_medio, G_medio),
+               names_to = "Componente", values_to = "Valor") |>
+  filter(!is.na(fecha), !is.na(Valor)) |>
+  mutate(Componente = recode(Componente,
+                             LE_medio = "LE",
+                             H_medio  = "H",
+                             Rn_medio = "Rn",
+                             G_medio  = "G"))
+
+if (hay_datos(componentes)) {
+  p_comp <- ggplot(componentes, aes(x = fecha, y = Valor, color = Componente, group = Componente)) +
+    geom_line(linewidth = 0.55, alpha = 0.85) +
+    facet_wrap(~grupo, scales = "free_y") +
+    labs(x = NULL, y = "Flujo medio diario (W m⁻²)", color = NULL) +
+    theme_minimal(base_size = 13)
+
+  p_comp
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes para graficar los componentes del balance energético.</div>")
+}
+```
+
+## Temperatura de superficie vs temperatura del aire
+
+```{r}
+#| label: fig-temp
+#| fig-height: 6
+
+temp_long <- diario |>
+  select(grupo, fecha, temp_aire, temp_superficie) |>
+  pivot_longer(c(temp_aire, temp_superficie), names_to = "variable", values_to = "valor") |>
+  filter(!is.na(fecha), !is.na(valor)) |>
+  mutate(variable = recode(variable,
+                           temp_aire = "Temperatura del aire",
+                           temp_superficie = "Temperatura superficial"))
+
+if (hay_datos(temp_long)) {
+  p_temp <- ggplot(temp_long, aes(x = fecha, y = valor, color = variable, group = variable)) +
+    geom_line(linewidth = 0.6, alpha = 0.85) +
+    facet_wrap(~grupo, scales = "free_y") +
+    labs(x = NULL, y = "Temperatura (°C)", color = NULL) +
+    theme_minimal(base_size = 13)
+
+  p_temp
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de temperatura para graficar.</div>")
+}
+```
+
+## Humedad del suelo
+
+```{r}
+#| label: fig-humedad
+#| fig-height: 6
+
+df_hs <- diario |>
+  filter(!is.na(fecha), !is.na(humedad_suelo))
+
+if (hay_datos(df_hs)) {
+  p_hs <- ggplot(df_hs, aes(x = fecha, y = humedad_suelo, color = grupo, group = grupo)) +
+    geom_line(linewidth = 0.75, alpha = 0.9) +
+    labs(x = NULL, y = "Humedad volumétrica del suelo (m³ m⁻³)", color = "Parcela") +
+    theme_minimal(base_size = 13)
+
+  p_hs
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de humedad de suelo para graficar.</div>")
+}
+```
+
+## Precipitación y ETo
+
+```{r}
+#| label: fig-agua-atmosfera
+#| fig-height: 5
+
+agua <- diario |>
+  group_by(fecha) |>
+  summarise(
+    lluvia = suppressWarnings(max(lluvia, na.rm = TRUE)),
+    ETo = suppressWarnings(mean(ETo, na.rm = TRUE)),
+    .groups = "drop"
+  ) |>
+  mutate(across(where(is.numeric), ~ ifelse(is.infinite(.x) | is.nan(.x), NA_real_, .x))) |>
+  pivot_longer(c(lluvia, ETo), names_to = "variable", values_to = "valor") |>
+  filter(!is.na(fecha), !is.na(valor)) |>
+  mutate(variable = recode(variable,
+                           lluvia = "Precipitación",
+                           ETo = "ETo"))
+
+if (hay_datos(agua)) {
+  p_agua <- ggplot(agua, aes(x = fecha, y = valor, color = variable, group = variable)) +
+    geom_line(linewidth = 0.75) +
+    labs(x = NULL, y = "mm día⁻¹", color = NULL) +
+    theme_minimal(base_size = 13)
+
+  p_agua
+} else {
+  htmltools::HTML("<div class='puma-card'>Aún no hay datos suficientes de precipitación o ETo para graficar.</div>")
+}
+```
+
+## Tabla exploratoria diaria
+
+```{r}
+#| label: tabla-diaria
+DT::datatable(
+  diario,
+  extensions = 'Buttons',
+  options = list(
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel'),
+    pageLength = 12,
+    scrollX = TRUE
+  )
+)
+```

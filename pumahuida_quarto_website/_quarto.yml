@@ -1,0 +1,56 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - data/*.xlsx
+    - data/*.docx
+    - img/*
+
+website:
+  title: "Proyecto Pumahuida"
+  site-url: "https://tusitio.github.io/proyecto-pumahuida"
+  navbar:
+    logo: img/logo-pumahuida.svg
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: proyecto.qmd
+        text: Proyecto
+      - href: zona-estudio.qmd
+        text: Zona de estudio
+      - href: parcelas.qmd
+        text: Parcelas
+      - href: metodologia.qmd
+        text: Metodología
+      - href: resultados.qmd
+        text: Resultados
+      - href: teledeteccion.qmd
+        text: Teledetección
+      - href: datos.qmd
+        text: Datos
+    right:
+      - icon: github
+        href: https://github.com/
+      - icon: envelope
+        href: mailto:contacto@ejemplo.cl
+  page-footer:
+    left: "Proyecto doctoral — Vivero y Jardín Pumahuida / Fundación AgroUC"
+    right: "Actualización quincenal de datos"
+
+format:
+  html:
+    theme:
+      light: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    page-layout: full
+    smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    df-print: paged
+execute:
+  warning: false
+  message: false
+  freeze: auto

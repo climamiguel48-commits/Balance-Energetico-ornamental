@@ -1,0 +1,19 @@
+{
+  "hash": "c9eb0701037188eeda198061bdd85de4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Demanda hídrica de vegetación ornamental nativa\"\nsubtitle: \"Enfoque para cuantificar la demanda de agua de la vegetación ornamental nativa de mayor potencial de uso para áreas verdes de las zonas semiáridas mediterráneas de chile\"\n---\n\n\n\n::: {.hero}\n# Agua, paisaje y datos vivos\n\nUna plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas **CAE1**, **CAE2** y especies **exóticas** en áreas verdes de clima mediterráneo semiárido de Chile.\n\n<span class=\"badge-soft\">Balance energético</span> <span class=\"badge-soft\">Eddy Covariance</span> <span class=\"badge-soft\">Lisimetría</span> <span class=\"badge-soft\">Knl / Kl</span> <span class=\"badge-soft\">Teledetección en desarrollo</span>\n:::\n\n::: {.card-grid}\n::: {.puma-card}\n**Días monitoreados**\n\n<div class=\"metric\">243</div>\nDesde 02-09-2025 hasta 02-05-2026.\n:::\n\n::: {.puma-card}\n**Registros horarios**\n\n<div class=\"metric\">13.490</div>\nDatos preliminares integrados por parcela.\n:::\n\n::: {.puma-card}\n**Parcelas instrumentadas**\n\n<div class=\"metric\">3</div>\nExótica, CAE1 y CAE2.\n:::\n\n::: {.puma-card}\n**Actualización prevista**\n\n<div class=\"metric\">15 días</div>\nEl sitio está listo para reemplazar archivos y volver a publicar.\n:::\n:::\n\n## Resumen del proyecto {.section-title}\n\nLa investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución.\n\n## Navegación rápida {.section-title}\n\n::: {.card-grid-wide}\n::: {.puma-card}\n### 🌿 Proyecto\nContexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.\n:::\n\n::: {.puma-card}\n### 📍 Zona de estudio\nUbicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.\n:::\n\n::: {.puma-card}\n### 🧪 Metodología\nSensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.\n:::\n\n::: {.puma-card}\n### 📈 Resultados\nGráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.\n:::\n\n::: {.puma-card}\n### 🛰 Teledetección\nMódulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.\n:::\n\n::: {.puma-card .download-card}\n### 📂 Datos abiertos\nDescarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito.\n[Ir a datos](datos.qmd)\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

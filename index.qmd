@@ -1,0 +1,93 @@
+---
+title: "Demanda hídrica de vegetación ornamental nativa"
+subtitle: "Enfoque para cuantificar la demanda de agua de la vegetación ornamental nativa de mayor potencial de uso para áreas verdes de las zonas semiáridas mediterráneas de chile"
+---
+
+```{r}
+#| label: setup-home
+#| include: false
+source("scripts/helpers.R")
+datos <- read_parcelas()
+diario <- summarise_daily(datos)
+fecha_min <- min(datos$fecha, na.rm = TRUE)
+fecha_max <- max(datos$fecha, na.rm = TRUE)
+dias_monitoreados <- as.integer(fecha_max - fecha_min) + 1
+n_registros <- nrow(datos)
+```
+
+::: {.hero}
+# Agua, paisaje y datos vivos
+
+Una plataforma abierta para seguir el avance del proyecto doctoral que cuantifica los requerimientos hídricos de especies ornamentales nativas **CAE1**, **CAE2** y especies **exóticas** en áreas verdes de clima mediterráneo semiárido de Chile.
+
+<span class="badge-soft">Balance energético</span> <span class="badge-soft">Eddy Covariance</span> <span class="badge-soft">Lisimetría</span> <span class="badge-soft">Knl / Kl</span> <span class="badge-soft">Teledetección en desarrollo</span>
+:::
+
+::: {.card-grid}
+::: {.puma-card}
+**Días monitoreados**
+
+<div class="metric">`r dias_monitoreados`</div>
+Desde `r format(fecha_min, '%d-%m-%Y')` hasta `r format(fecha_max, '%d-%m-%Y')`.
+:::
+
+::: {.puma-card}
+**Registros horarios**
+
+<div class="metric">`r format(n_registros, big.mark='.')`</div>
+Datos preliminares integrados por parcela.
+:::
+
+::: {.puma-card}
+**Parcelas instrumentadas**
+
+<div class="metric">3</div>
+Exótica, CAE1 y CAE2.
+:::
+
+::: {.puma-card}
+**Actualización prevista**
+
+<div class="metric">15 días</div>
+El sitio está listo para reemplazar archivos y volver a publicar.
+:::
+:::
+
+## Resumen del proyecto {.section-title}
+
+La investigación desarrolla un marco metodológico integrado para estimar la demanda hídrica de comunidades vegetales ornamentales nativas y exóticas en condiciones urbanas heterogéneas. El enfoque combina mediciones in situ de balance energético, datos meteorológicos, Eddy Covariance, balance hídrico por lisimetría y, en una etapa posterior, modelos de teledetección de alta resolución.
+
+## Navegación rápida {.section-title}
+
+::: {.card-grid-wide}
+::: {.puma-card}
+### 🌿 Proyecto
+Contexto, hipótesis, objetivos y aporte científico para áreas verdes resilientes.
+:::
+
+::: {.puma-card}
+### 📍 Zona de estudio
+Ubicación del Vivero y Jardín Pumahuida y Fundación AgroUC, con mapas y características climáticas.
+:::
+
+::: {.puma-card}
+### 🧪 Metodología
+Sensores, balance energético, Eddy Covariance, programación de riego, lisímetros y validación.
+:::
+
+::: {.puma-card}
+### 📈 Resultados
+Gráficas interactivas de flujos energéticos, temperatura, humedad del suelo y datos diarios.
+:::
+
+::: {.puma-card}
+### 🛰 Teledetección
+Módulo preparado para NDVI, EVI, temperatura superficial, LiDAR y modelos RS-PM/TSEB-PT cuando los datos estén disponibles.
+:::
+
+::: {.puma-card .download-card}
+### 📂 Datos abiertos
+Descarga directa de bases, Eddy Covariance, estación meteorológica y manuscrito.
+[Ir a datos](datos.qmd)
+:::
+:::

@@ -1,0 +1,56 @@
+---
+title: "Teledetección"
+---
+
+::: {.puma-card .status-dev}
+### Módulo en desarrollo
+
+Esta sección queda preparada para incorporar los datos de teledetección cuando estén disponibles. Por ahora se han realizado algunas capturas, pero los productos procesados todavía no están incorporados al sitio.
+:::
+
+## Datos esperados
+
+::: {.card-grid}
+::: {.puma-card}
+### NDVI / EVI
+Índices de vegetación para monitorear vigor, cobertura y cambios fenológicos entre parcelas.
+:::
+
+::: {.puma-card}
+### Temperatura superficial
+Información térmica para alimentar modelos de balance energético y detectar estrés hídrico.
+:::
+
+::: {.puma-card}
+### LiDAR
+Altura, volumen y estructura tridimensional del dosel para estimar biomasa y normalizar resultados.
+:::
+
+::: {.puma-card}
+### Modelos ET
+Implementación futura de RS-PM y TSEB-PT calibrados con datos locales.
+:::
+:::
+
+## Flujo de trabajo previsto
+
+1. Procesamiento radiométrico y geométrico de imágenes.
+2. Generación de ortomosaicos multiespectrales y térmicos.
+3. Cálculo de índices NDVI, EVI y temperatura superficial.
+4. Extracción de estadísticas por parcela.
+5. Integración con datos meteorológicos y balance energético.
+6. Evaluación de modelos RS-PM y TSEB-PT contra mediciones de referencia.
+
+## Visualizaciones futuras
+
+Cuando estén disponibles los productos, esta página incluirá:
+
+- Mapas interactivos por fecha de vuelo.
+- Comparación temporal de NDVI y EVI.
+- Mapas térmicos de temperatura de copa y suelo.
+- Estimación espacial de ET por parcela.
+- Comparación entre ET medida y ET modelada.
+
+::: {.callout-note}
+Esta sección está diseñada para crecer sin rehacer el sitio. Cuando tengas los productos de dron, se agregan a una carpeta `data/remote_sensing/` y se conectan aquí.
+:::

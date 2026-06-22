@@ -1,0 +1,71 @@
+---
+title: "Descarga de datos"
+---
+
+Los archivos se pueden descargar directamente desde esta sección. Cuando actualices las bases cada 15 días, basta con reemplazar los archivos dentro de la carpeta `data/` manteniendo los mismos nombres.
+
+::: {.callout-tip}
+Los botones siguientes son enlaces directos a archivos incluidos en el sitio. En GitHub Pages deberían abrir la descarga o cargar el archivo en una pestaña nueva, según el navegador.
+:::
+
+::: {.card-grid}
+::: {.puma-card .download-card}
+### Parcela CAE1
+Datos horarios corregidos de balance energético.
+
+<a class="btn-puma" href="data/datos_horario_LE_corregidos_final_CAE1.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Parcela CAE2
+Datos horarios corregidos de balance energético.
+
+<a class="btn-puma" href="data/datos_horario_LE_corregidos_final_CAE2.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Parcela Exótica
+Datos horarios corregidos de balance energético.
+
+<a class="btn-puma" href="data/datos_horario_LE_corregidos_final_exotico.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Estación meteorológica / CAE2
+Variables meteorológicas y datos asociados a la parcela CAE2.
+
+<a class="btn-puma" href="data/Datos_Parcela_CAE2_y_estacion_meteorologica.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Eddy Covariance — anemómetro
+Datos horarios del anemómetro sónico.
+
+<a class="btn-puma" href="data/Eddy_covariance_anemometro_hora.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Eddy Covariance — IRGA
+Datos horarios del analizador de gases.
+
+<a class="btn-puma" href="data/Eddy_covariance_Irga_hora.xlsx" download>⬇ Descargar Excel</a>
+:::
+
+::: {.puma-card .download-card}
+### Manuscrito del proyecto
+Documento base del proyecto doctoral.
+
+<a class="btn-puma" href="data/Proyecto%20de%20tesis%20doctoral_Miguel%20Silva_final_2.docx" download>⬇ Descargar Word</a>
+:::
+:::
+
+## Recomendación para actualización quincenal
+
+1. Reemplazar el Excel correspondiente dentro de `data/`.
+2. Mantener exactamente el mismo nombre del archivo.
+3. Ejecutar `quarto render`.
+4. Subir los cambios a GitHub.
+
+::: {.callout-note}
+La lectura de datos fue ajustada para evitar errores por columnas con tipos mixtos entre archivos, como `RECORD`. El sitio lee las bases inicialmente como texto y luego convierte solo las variables necesarias para graficar.
+:::
