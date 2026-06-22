@@ -17,6 +17,9 @@ library(knitr)
 
 # -----------------------------------------------------------------------------
 # Resultados preliminares - versión estable solo con ggplot2
+# Separación conceptual:
+# 1) Variables meteorológicas: una sola serie temporal, sin comparación por parcela.
+# 2) Variables de parcela/superficie: comparación CAE1, CAE2 y Exótico.
 # -----------------------------------------------------------------------------
 
 archivos <- list(
@@ -26,13 +29,23 @@ archivos <- list(
 )
 
 normalizar_fecha_hora <- function(x) {
-  if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) return(as.POSIXct(x, tz = "America/Santiago"))
-  if (inherits(x, "Date")) return(as.POSIXct(x, tz = "America/Santiago"))
-  if (is.numeric(x)) return(as.POSIXct(x * 86400, origin = "1899-12-30", tz = "America/Santiago"))
+  if (inherits(x, "POSIXct") || inherits(x, "POSIXt")) {
+    return(as.POSIXct(x, tz = "America/Santiago"))
+  }
+  if (inherits(x, "Date")) {
+    return(as.POSIXct(x, tz = "America/Santiago"))
+  }
+  if (is.numeric(x)) {
+    return(as.POSIXct(x * 86400, origin = "1899-12-30", tz = "America/Santiago"))
+  }
 
   suppressWarnings(parse_date_time(
     as.character(x),
-    orders = c("ymd HMS", "ymd HM", "ymd", "dmy HMS", "dmy HM", "dmy", "mdy HMS", "mdy HM", "mdy"),
+    orders = c(
+      "ymd HMS", "ymd HM", "ymd",
+      "dmy HMS", "dmy HM", "dmy",
+      "mdy HMS", "mdy HM", "mdy"
+    ),
     tz = "America/Santiago",
     quiet = TRUE
   ))
@@ -59,15 +72,22 @@ leer_parcela <- function(ruta, grupo) {
     df$temp_superficie <- df$TT_C
   }
 
-  # Columnas esperadas para los gráficos
-  variables_necesarias <- c(
-    "temp_superficie", "velocidad_viento", "WindDir", "temp_aire", "HR", "G",
-    "humedad_volumetrica", "SWC_40CM", "LE_final", "H_final", "ET_mm_h"
+  # Variables meteorológicas: provienen de una única estación.
+  variables_meteo <- c(
+    "temp_aire", "HR", "velocidad_viento", "WindDir",
+    "Rain_mm_Tot", "ETos", "presion_atm"
   )
 
+  # Variables medidas/calculadas por parcela.
+  variables_parcela <- c(
+    "temp_superficie", "G", "Rn",
+    "humedad_volumetrica", "SWC_40CM",
+    "LE_final", "H_final", "ET_mm_h"
+  )
+
+  variables_necesarias <- unique(c(variables_meteo, variables_parcela))
   for (v in variables_necesarias) df <- asegurar_columna(df, v)
 
-  # Fecha/hora principal
   if ("fecha_hora" %in% names(df)) {
     fecha_hora <- normalizar_fecha_hora(df$fecha_hora)
   } else if ("fecha" %in% names(df)) {
@@ -92,38 +112,79 @@ datos <- bind_rows(lapply(names(archivos), function(g) leer_parcela(archivos[[g]
   filter(!is.na(fecha_hora)) |>
   arrange(grupo, fecha_hora)
 
-variables_graficar <- tibble::tribble(
-  ~variable, ~titulo, ~ylab, ~agregacion,
-  "temp_superficie", "Temperatura superficial", "Temperatura superficial (°C)", "mean",
-  "velocidad_viento", "Velocidad del viento", "Velocidad del viento (m s⁻¹)", "mean",
-  "WindDir", "Dirección del viento", "Dirección del viento (°)", "mean",
-  "temp_aire", "Temperatura del aire a 2 m", "Temperatura del aire a 2 m (°C)", "mean",
-  "HR", "Humedad relativa del aire", "Humedad relativa (%)", "mean",
-  "G", "Flujo de calor del suelo", "G (W m⁻²)", "mean",
-  "humedad_volumetrica", "Humedad del suelo a 5 cm", "Humedad volumétrica a 5 cm (m³ m⁻³)", "mean",
-  "SWC_40CM", "Humedad del suelo a 40 cm", "Humedad volumétrica a 40 cm (m³ m⁻³)", "mean",
-  "LE_final", "Flujo de calor latente", "LE (W m⁻²)", "mean",
-  "H_final", "Flujo de calor sensible", "H (W m⁻²)", "mean",
-  "ET_mm_h", "Evapotranspiración horaria", "ET (mm h⁻¹)", "sum"
+# Datos meteorológicos: se colapsan por fecha/hora para evitar triplicar la estación.
+# Si el mismo valor aparece repetido en los tres archivos, queda una sola observación.
+# Si hay pequeñas diferencias por combinación de archivos, se usa el promedio horario.
+variables_meteo <- c("temp_aire", "HR", "velocidad_viento", "WindDir", "Rain_mm_Tot", "ETos", "presion_atm")
+
+datos_meteo <- datos |>
+  select(fecha_hora, fecha, all_of(variables_meteo)) |>
+  group_by(fecha_hora, fecha) |>
+  summarise(
+    across(
+      all_of(variables_meteo),
+      ~ if (all(is.na(.x))) NA_real_ else mean(.x, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  ) |>
+  arrange(fecha_hora)
+
+# Datos de parcela: conservan el grupo experimental.
+variables_parcela <- c(
+  "temp_superficie", "G", "Rn",
+  "humedad_volumetrica", "SWC_40CM",
+  "LE_final", "H_final", "ET_mm_h"
 )
 
-resumen_disponibilidad <- variables_graficar |>
+datos_parcela <- datos |>
+  select(grupo, fecha_hora, fecha, all_of(variables_parcela)) |>
+  arrange(grupo, fecha_hora)
+
+resumen_general <- tibble::tibble(
+  registros_horarios_parcela = nrow(datos_parcela),
+  registros_horarios_meteo = nrow(datos_meteo),
+  fecha_inicial = min(datos$fecha, na.rm = TRUE),
+  fecha_final = max(datos$fecha, na.rm = TRUE),
+  parcelas = n_distinct(datos$grupo)
+)
+
+fmt_num <- function(x, digits = 0) {
+  format(round(x, digits), big.mark = ".", decimal.mark = ",", nsmall = digits)
+}
+
+resumen_disponibilidad_parcela <- tibble::tribble(
+  ~variable, ~descripcion,
+  "temp_superficie", "Temperatura superficial",
+  "G", "Flujo de calor del suelo",
+  "Rn", "Radiación neta",
+  "humedad_volumetrica", "Humedad del suelo a 5 cm",
+  "SWC_40CM", "Humedad del suelo a 40 cm",
+  "LE_final", "Flujo de calor latente",
+  "H_final", "Flujo de calor sensible",
+  "ET_mm_h", "Evapotranspiración horaria"
+) |>
   rowwise() |>
   mutate(
-    registros_validos = sum(!is.na(datos[[variable]])),
-    parcelas_con_datos = paste(unique(datos$grupo[!is.na(datos[[variable]])]), collapse = ", ")
+    registros_validos = sum(!is.na(datos_parcela[[variable]])),
+    parcelas_con_datos = paste(unique(datos_parcela$grupo[!is.na(datos_parcela[[variable]])]), collapse = ", ")
   ) |>
   ungroup()
 
-resumen_general <- datos |>
-  summarise(
-    registros = n(),
-    fecha_inicial = min(fecha, na.rm = TRUE),
-    fecha_final = max(fecha, na.rm = TRUE),
-    parcelas = n_distinct(grupo)
-  )
+resumen_disponibilidad_meteo <- tibble::tribble(
+  ~variable, ~descripcion,
+  "temp_aire", "Temperatura del aire a 2 m",
+  "HR", "Humedad relativa del aire",
+  "velocidad_viento", "Velocidad del viento",
+  "WindDir", "Dirección del viento",
+  "Rain_mm_Tot", "Precipitación",
+  "ETos", "Evapotranspiración de referencia",
+  "presion_atm", "Presión atmosférica"
+) |>
+  rowwise() |>
+  mutate(registros_validos = sum(!is.na(datos_meteo[[variable]]))) |>
+  ungroup()
 
-preparar_diario <- function(df, variable, agregacion = "mean") {
+preparar_diario_parcela <- function(df, variable, agregacion = "mean") {
   if (!variable %in% names(df)) {
     return(tibble(grupo = character(), fecha = as.Date(character()), valor = numeric()))
   }
@@ -143,10 +204,50 @@ preparar_diario <- function(df, variable, agregacion = "mean") {
     filter(!is.na(fecha), !is.na(valor))
 }
 
-hay_datos <- function(df) is.data.frame(df) && nrow(df) > 0 && sum(!is.na(df$valor)) > 0
+preparar_diario_meteo <- function(df, variable, agregacion = "mean") {
+  if (!variable %in% names(df)) {
+    return(tibble(fecha = as.Date(character()), valor = numeric()))
+  }
 
-plot_variable <- function(variable, titulo, ylab, agregacion = "mean") {
-  df <- preparar_diario(datos, variable, agregacion)
+  if (agregacion == "sum") {
+    salida <- df |>
+      group_by(fecha) |>
+      summarise(valor = sum(.data[[variable]], na.rm = TRUE), .groups = "drop")
+  } else {
+    salida <- df |>
+      group_by(fecha) |>
+      summarise(valor = mean(.data[[variable]], na.rm = TRUE), .groups = "drop")
+  }
+
+  salida |>
+    mutate(valor = ifelse(is.infinite(valor) | is.nan(valor), NA_real_, valor)) |>
+    filter(!is.na(fecha), !is.na(valor))
+}
+
+hay_datos <- function(df) is.data.frame(df) && nrow(df) > 0 && any(!is.na(df$valor))
+
+plot_meteo <- function(variable, titulo, ylab, agregacion = "mean") {
+  df <- preparar_diario_meteo(datos_meteo, variable, agregacion)
+
+  if (!hay_datos(df)) {
+    plot.new()
+    text(0.5, 0.5, paste("Aún no hay datos suficientes para graficar:", titulo), cex = 1.1)
+    return(invisible(NULL))
+  }
+
+  ggplot(df, aes(x = fecha, y = valor)) +
+    geom_line(linewidth = 0.65, alpha = 0.9) +
+    labs(
+      title = titulo,
+      x = "Fecha",
+      y = ylab
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(plot.title = element_text(face = "bold", size = 15))
+}
+
+plot_parcela <- function(variable, titulo, ylab, agregacion = "mean") {
+  df <- preparar_diario_parcela(datos_parcela, variable, agregacion)
 
   if (!hay_datos(df)) {
     plot.new()
@@ -174,9 +275,15 @@ plot_variable <- function(variable, titulo, ylab, agregacion = "mean") {
 
 ::: {.card-grid}
 ::: {.puma-card}
-**Registros horarios**
+**Registros horarios por parcela**
 
-<div class="metric">`r format(resumen_general$registros, big.mark = '.', decimal.mark = ',')`</div>
+<div class="metric">`r fmt_num(resumen_general$registros_horarios_parcela)`</div>
+:::
+
+::: {.puma-card}
+**Registros meteorológicos únicos**
+
+<div class="metric">`r fmt_num(resumen_general$registros_horarios_meteo)`</div>
 :::
 
 ::: {.puma-card}
@@ -190,51 +297,33 @@ plot_variable <- function(variable, titulo, ylab, agregacion = "mean") {
 
 <div class="metric-small">`r resumen_general$fecha_final`</div>
 :::
-
-::: {.puma-card}
-**Parcelas**
-
-<div class="metric">`r resumen_general$parcelas`</div>
-:::
 :::
 
-## Disponibilidad de variables
+Las variables meteorológicas provienen de una única estación instalada en el área experimental. Por esa razón, se presentan como una sola serie temporal y no como comparación entre parcelas. Las variables de superficie, suelo y balance energético sí se presentan por parcela, porque corresponden a mediciones o estimaciones asociadas a CAE1, CAE2 y Exótico.
+
+## Disponibilidad de variables meteorológicas
 
 ```{r}
-#| label: tabla-disponibilidad
+#| label: tabla-disponibilidad-meteo
 #| echo: false
 
-resumen_disponibilidad |>
-  select(Variable = variable, `Registros válidos` = registros_validos, `Parcelas con datos` = parcelas_con_datos) |>
+resumen_disponibilidad_meteo |>
+  select(Variable = variable, Descripción = descripcion, `Registros válidos` = registros_validos) |>
   knitr::kable()
 ```
 
-## Temperatura superficial
+## Disponibilidad de variables por parcela
 
 ```{r}
-#| label: fig-temp-superficie
-#| fig-height: 5.5
+#| label: tabla-disponibilidad-parcela
 #| echo: false
-plot_variable("temp_superficie", "Temperatura superficial", "Temperatura superficial (°C)")
+
+resumen_disponibilidad_parcela |>
+  select(Variable = variable, Descripción = descripcion, `Registros válidos` = registros_validos, `Parcelas con datos` = parcelas_con_datos) |>
+  knitr::kable()
 ```
 
-## Velocidad del viento
-
-```{r}
-#| label: fig-velocidad-viento
-#| fig-height: 5.5
-#| echo: false
-plot_variable("velocidad_viento", "Velocidad del viento", "Velocidad del viento (m s⁻¹)")
-```
-
-## Dirección del viento
-
-```{r}
-#| label: fig-direccion-viento
-#| fig-height: 5.5
-#| echo: false
-plot_variable("WindDir", "Dirección del viento", "Dirección del viento (°)")
-```
+# Condiciones meteorológicas
 
 ## Temperatura del aire a 2 m
 
@@ -242,7 +331,7 @@ plot_variable("WindDir", "Dirección del viento", "Dirección del viento (°)")
 #| label: fig-temp-aire
 #| fig-height: 5.5
 #| echo: false
-plot_variable("temp_aire", "Temperatura del aire a 2 m", "Temperatura del aire a 2 m (°C)")
+plot_meteo("temp_aire", "Temperatura del aire registrada a 2 m", "Temperatura del aire a 2 m (°C)")
 ```
 
 ## Humedad relativa del aire
@@ -251,16 +340,54 @@ plot_variable("temp_aire", "Temperatura del aire a 2 m", "Temperatura del aire a
 #| label: fig-hr
 #| fig-height: 5.5
 #| echo: false
-plot_variable("HR", "Humedad relativa del aire", "Humedad relativa (%)")
+plot_meteo("HR", "Humedad relativa del aire", "Humedad relativa (%)")
 ```
 
-## Flujo de calor del suelo
+## Velocidad del viento
 
 ```{r}
-#| label: fig-g
+#| label: fig-velocidad-viento
 #| fig-height: 5.5
 #| echo: false
-plot_variable("G", "Flujo de calor del suelo", "G (W m⁻²)")
+plot_meteo("velocidad_viento", "Velocidad del viento", "Velocidad del viento (m s⁻¹)")
+```
+
+## Dirección del viento
+
+```{r}
+#| label: fig-direccion-viento
+#| fig-height: 5.5
+#| echo: false
+plot_meteo("WindDir", "Dirección del viento", "Dirección del viento (°)")
+```
+
+## Precipitación diaria
+
+```{r}
+#| label: fig-precipitacion
+#| fig-height: 5.5
+#| echo: false
+plot_meteo("Rain_mm_Tot", "Precipitación diaria", "Precipitación (mm día⁻¹)", agregacion = "sum")
+```
+
+## Evapotranspiración de referencia
+
+```{r}
+#| label: fig-etos
+#| fig-height: 5.5
+#| echo: false
+plot_meteo("ETos", "Evapotranspiración de referencia", "ET₀ (mm día⁻¹)", agregacion = "sum")
+```
+
+# Variables de superficie, suelo y balance energético
+
+## Temperatura superficial
+
+```{r}
+#| label: fig-temp-superficie
+#| fig-height: 5.5
+#| echo: false
+plot_parcela("temp_superficie", "Temperatura superficial por parcela", "Temperatura superficial (°C)")
 ```
 
 ## Humedad del suelo a 5 cm
@@ -269,7 +396,7 @@ plot_variable("G", "Flujo de calor del suelo", "G (W m⁻²)")
 #| label: fig-humedad-5cm
 #| fig-height: 5.5
 #| echo: false
-plot_variable("humedad_volumetrica", "Humedad del suelo a 5 cm", "Humedad volumétrica a 5 cm (m³ m⁻³)")
+plot_parcela("humedad_volumetrica", "Humedad del suelo a 5 cm por parcela", "Humedad volumétrica a 5 cm (m³ m⁻³)")
 ```
 
 ## Humedad del suelo a 40 cm
@@ -278,7 +405,16 @@ plot_variable("humedad_volumetrica", "Humedad del suelo a 5 cm", "Humedad volum�
 #| label: fig-humedad-40cm
 #| fig-height: 5.5
 #| echo: false
-plot_variable("SWC_40CM", "Humedad del suelo a 40 cm", "Humedad volumétrica a 40 cm (m³ m⁻³)")
+plot_parcela("SWC_40CM", "Humedad del suelo a 40 cm por parcela", "Humedad volumétrica a 40 cm (m³ m⁻³)")
+```
+
+## Flujo de calor del suelo
+
+```{r}
+#| label: fig-g
+#| fig-height: 5.5
+#| echo: false
+plot_parcela("G", "Flujo de calor del suelo por parcela", "G (W m⁻²)")
 ```
 
 ## Flujo de calor latente
@@ -287,7 +423,7 @@ plot_variable("SWC_40CM", "Humedad del suelo a 40 cm", "Humedad volumétrica a 4
 #| label: fig-le-final
 #| fig-height: 5.5
 #| echo: false
-plot_variable("LE_final", "Flujo de calor latente", "LE (W m⁻²)")
+plot_parcela("LE_final", "Flujo de calor latente por parcela", "LE (W m⁻²)")
 ```
 
 ## Flujo de calor sensible
@@ -296,16 +432,16 @@ plot_variable("LE_final", "Flujo de calor latente", "LE (W m⁻²)")
 #| label: fig-h-final
 #| fig-height: 5.5
 #| echo: false
-plot_variable("H_final", "Flujo de calor sensible", "H (W m⁻²)")
+plot_parcela("H_final", "Flujo de calor sensible por parcela", "H (W m⁻²)")
 ```
 
-## Evapotranspiración horaria
+## Evapotranspiración diaria acumulada
 
 ```{r}
 #| label: fig-et
 #| fig-height: 5.5
 #| echo: false
-plot_variable("ET_mm_h", "Evapotranspiración diaria acumulada a partir de registros horarios", "ET acumulada diaria (mm día⁻¹)", agregacion = "sum")
+plot_parcela("ET_mm_h", "Evapotranspiración diaria acumulada por parcela", "ET acumulada diaria (mm día⁻¹)", agregacion = "sum")
 ```
 
 ## Componentes principales del balance energético
@@ -316,10 +452,10 @@ plot_variable("ET_mm_h", "Evapotranspiración diaria acumulada a partir de regis
 #| echo: false
 
 componentes <- bind_rows(
-  preparar_diario(datos, "Rn", "mean") |> mutate(componente = "Rn"),
-  preparar_diario(datos, "G", "mean") |> mutate(componente = "G"),
-  preparar_diario(datos, "LE_final", "mean") |> mutate(componente = "LE"),
-  preparar_diario(datos, "H_final", "mean") |> mutate(componente = "H")
+  preparar_diario_parcela(datos_parcela, "Rn", "mean") |> mutate(componente = "Rn"),
+  preparar_diario_parcela(datos_parcela, "G", "mean") |> mutate(componente = "G"),
+  preparar_diario_parcela(datos_parcela, "LE_final", "mean") |> mutate(componente = "LE"),
+  preparar_diario_parcela(datos_parcela, "H_final", "mean") |> mutate(componente = "H")
 )
 
 if (hay_datos(componentes)) {
@@ -327,7 +463,7 @@ if (hay_datos(componentes)) {
     geom_line(linewidth = 0.55, alpha = 0.85) +
     facet_wrap(~grupo, scales = "free_y") +
     labs(
-      title = "Componentes diarios del balance energético",
+      title = "Componentes diarios del balance energético por parcela",
       x = "Fecha",
       y = "Flujo medio diario (W m⁻²)",
       color = "Componente"
@@ -342,4 +478,3 @@ if (hay_datos(componentes)) {
   text(0.5, 0.5, "Aún no hay datos suficientes para graficar los componentes del balance energético.", cex = 1.1)
 }
 ```
-
