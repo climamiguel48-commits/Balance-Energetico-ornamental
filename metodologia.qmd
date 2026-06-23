@@ -4,7 +4,7 @@ title: "Metodología"
 
 ## Enfoque general
 
-La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes.
+La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo es construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes y sin restricción hídrica. 
 
 ## Balance energético
 
@@ -72,4 +72,10 @@ El sistema de balance energético será calibrado mediante comparación con fluj
 
 El riego se maneja por goteo y agotamiento del agua fácilmente aprovechable. La programación considera capacidad de campo, punto de marchitez permanente, densidad aparente, profundidad radicular, pedregosidad, porcentaje de suelo mojado y umbral de riego.
 
+## Coeficientes de paisajismo 
+
+Este corresponde a la relación de la evapotranspiración calculada en cada parcela y la evapotranspiración de referencia:
+
+$$ Knl = ET/ETo $$
+Expresa la proporción del consumo hídrico de cada grupo de plantas, **CAE1**, **CAE2** y exotica. 
 

@@ -270,14 +270,14 @@
     "href": "metodologia.html",
     "title": "Metodología",
     "section": "",
-    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
+    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo es construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes y sin restricción hídrica."
   },
   {
     "objectID": "metodologia.html#enfoque-general",
     "href": "metodologia.html#enfoque-general",
     "title": "Metodología",
     "section": "",
-    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo no es solo obtener curvas bonitas —aunque eso ayuda bastante—, sino construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes."
+    "text": "La metodología integra mediciones micrometeorológicas, balance energético, balance hídrico y validación con Eddy Covariance. El objetivo es construir una base técnica para estimar consumo hídrico y coeficientes de paisajismo en condiciones reales de áreas verdes y sin restricción hídrica."
   },
   {
     "objectID": "metodologia.html#balance-energético",
@@ -306,6 +306,13 @@
     "title": "Metodología",
     "section": "Programación de riego",
     "text": "Programación de riego\nEl riego se maneja por goteo y agotamiento del agua fácilmente aprovechable. La programación considera capacidad de campo, punto de marchitez permanente, densidad aparente, profundidad radicular, pedregosidad, porcentaje de suelo mojado y umbral de riego."
+  },
+  {
+    "objectID": "metodologia.html#coeficientes-de-paisajismo",
+    "href": "metodologia.html#coeficientes-de-paisajismo",
+    "title": "Metodología",
+    "section": "Coeficientes de paisajismo",
+    "text": "Coeficientes de paisajismo\nEste corresponde a la relación de la evapotranspiración calculada en cada parcela y la evapotranspiración de referencia:\n\\[ Knl = ET/ETo \\] Expresa la proporción del consumo hídrico de cada grupo de plantas, CAE1, CAE2 y exotica."
   },
   {
     "objectID": "proyecto.html",
